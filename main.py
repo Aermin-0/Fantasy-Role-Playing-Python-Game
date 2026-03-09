@@ -13,7 +13,7 @@ while player_alive:
     player_stats = [0, 0, 0, 0 ,0, 0, 0, 0]
 
     # initiliaze players currency amount
-    gold = 0
+    player_gold = 0
 
     while class_unchosen:
         # Knight is Strong, Endurant, and Evasive.
@@ -78,7 +78,7 @@ while player_alive:
 
     # initiliaze players first impactful game choice
     choice1 = True
-    
+
     while choice1:
         choice1_input = input("Which way do you go? (L / R): ").upper()
         if choice1_input == "L":
@@ -116,9 +116,12 @@ while player_alive:
                 player_alive = False
         elif mk_choice == "Persuade":
             if player_stats[3] >= random.randint(0, 10):
+                goldgiven_mk = random.randint(250, 501)
+                player_gold += goldgiven_mk
+
                 print("You succesfully persuaded the King with your charisma, claiming you'll")
                 print("return the bread with a small loan of gold from the King!")
-                print(f"The King gives you {random.randint(range(250, 501))} gold and sends you on your way!")
+                print(f"The King gives you {goldgiven_mk} gold and sends you on your way!")
             else:
                 print("You stuttered and the King laughed in your face...")
                 print("and you died of embarrasment...")
