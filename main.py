@@ -6,7 +6,6 @@ player_alive = True
 while player_alive:
     print("Welcome to the Dungeons & Dragons game!")
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
-    class_unchosen = True
 
     # initiliaze player stats
     # 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness
@@ -15,6 +14,10 @@ while player_alive:
     # initiliaze players currency amount
     player_gold = 0
 
+    # initiliaze players health amount
+    player_hp = 100
+
+    class_unchosen = True
     while class_unchosen:
         # Knight is Strong, Endurant, and Evasive.
         if player_character == "KNIGHT":
@@ -40,6 +43,7 @@ while player_alive:
     def player_stat_info():    
         print()
         print("Class:", player_character.capitalize())
+        print("Health:", player_hp,"/100")
         print("------------------")
         print("       Stats      ")
         print("------------------")
@@ -103,7 +107,7 @@ while player_alive:
             mk_choice_running = True
             while mk_choice_running:
                 player_stat_info()
-                mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
+                mk_choice = input("(Attack, Persuade, Run, or.. Seduce?) ").upper()
                 if mk_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
                     mk_choice_running = False
                 else:
@@ -120,7 +124,7 @@ while player_alive:
                     print("Game Over!")
                     player_alive = False
                     choice1 = False
-                    
+
             elif mk_choice == "PERSUADE":
                 if player_stats[3] >= random.randint(0, 10):
                     goldgiven_mk = random.randint(250, 501)
@@ -167,4 +171,28 @@ while player_alive:
         elif environment1 == "Forest":
             print()
             print("You took a cut in the path and have gotten lost in the forest...")
-            print("while trying to find a way out")
+            print("while trying to find a way out.. you encounter a Wild Black Bear! What will you do?")
+
+            black_bear_hp = 100
+            while player_hp > 0 and black_bear_hp > 0:
+                fr_choice_running = True
+                print(f"Black Bear HP: {black_bear_hp}/100")
+                while fr_choice_running:
+                    player_stat_info()
+                    fr_choice = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
+                    if fr_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
+                        fr_choice_running = False
+                    else:
+                        print("Invalid Option. Try again.")
+                
+                    if fr_choice == "ATTACK":
+                        if player_stats[0] >= random.randint(5,15):
+                            dmg_bb = random.randint(0, 101)
+                            print(f"You dealt {dmg_bb} damage to the bear!")
+                            black_bear_hp -= dmg_bb
+                        else:
+                            dmg_player_bb = random.randint(0, 101)
+                            print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
+                            player_hp -= dmg_player_bb
+            print("You defeated the Wild Black Bear!")
+            
