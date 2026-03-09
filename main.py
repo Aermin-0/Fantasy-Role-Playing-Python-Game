@@ -196,7 +196,6 @@ while player_alive:
                             print("You defeated the Wild Black Bear!")
                             black_bear_fight = False
                             choice1 = False
-                            break
                     else:
                         dmg_player_bb = random.randint(0, 101)
                         print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
@@ -229,6 +228,10 @@ while player_alive:
                     choice1 = False
                     player_alive = False
 
-            # If the fight ended with a win/escape/death, stop the outer choice loop too
+            # ff the fight ended with a win/escape/death, stop the outer choice loop too
             if not choice1:
                 break
+
+# To Do:
+# Cave, Desert, and Swamp
+# Shop system after choice1 is exited.
