@@ -86,8 +86,8 @@ while player_alive:
     choice1 = True
 
     while choice1:
-        choice2 = True
-        while choice2:
+        choice1_2 = True
+        while choice1_2:
             choice1_input = input("Which way do you go? (L / R): ").upper()
             if choice1_input == "L":
                 environment1 = random.choice(choice1_environments[0:2])
@@ -141,7 +141,7 @@ while player_alive:
                     print()
                     print("Game Over!")
                     player_alive = False
-                    choice1 = False
+                    choice1_2 and choice1 = False
 
             elif mk_choice == "RUN":
                 if player_stats[7] >= random.randint(5, 16):
@@ -155,7 +155,7 @@ while player_alive:
                     print()
                     print("Game Over!")
                     player_alive = False
-                    choice1 = False
+                    choice1 and choice1_2 = False
 
             elif mk_choice == "SEDUCE":
                 print("You attempt to seduce the King... ")
@@ -172,9 +172,16 @@ while player_alive:
             print()
             print("You took a cut in the path and have gotten lost in the forest...")
             print("while trying to find a way out.. you encounter a Wild Black Bear! What will you do?")
+            print()
 
             black_bear_hp = 100
-            while player_hp > 0 and black_bear_hp > 0:
+
+            black_bear_fight = True
+
+            while black_bear_fight:
+                if player_hp <= 0 or black_bear_hp <= 0:
+                    black_bear_fight = False
+
                 fr_choice_running = True
                 print(f"Black Bear HP: {black_bear_hp}/100")
                 while fr_choice_running:
@@ -185,14 +192,24 @@ while player_alive:
                     else:
                         print("Invalid Option. Try again.")
                 
-                    if fr_choice == "ATTACK":
-                        if player_stats[0] >= random.randint(5,15):
-                            dmg_bb = random.randint(0, 101)
-                            print(f"You dealt {dmg_bb} damage to the bear!")
-                            black_bear_hp -= dmg_bb
-                        else:
-                            dmg_player_bb = random.randint(0, 101)
-                            print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
-                            player_hp -= dmg_player_bb
-            print("You defeated the Wild Black Bear!")
+                if fr_choice == "ATTACK":
+                    if player_stats[0] >= random.randint(5,15):
+                        dmg_bb = random.randint(0, 101)
+                        print(f"You dealt {dmg_bb} damage to the bear!")
+                        black_bear_hp -= dmg_bb
+                    else:
+                        dmg_player_bb = random.randint(0, 101)
+                        print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
+                        player_hp -= dmg_player_bb
+
+                if fr_choice == "PERSUADE":
+                    if player_stats[3] >= random.randint(5, 16) and player_stats[6] >= random.randint(5, 16):
+                        print("You succesfully communicated with the bear in 'bear' language...")
+                        print("the bear understood you were just a mere traveller and let you pass...")
+                        break
+            
+            if black_bear_hp <= 0:
+                print("You defeated the Wild Black Bear!")
+                choice1 and choice1_2 = False
+
             
