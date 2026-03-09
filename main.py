@@ -52,10 +52,13 @@ while player_alive:
     print(f"Evasiveness: {player_stats[7]}")
     print()
 
+    # initiliaze the players first confirmation
     confirm1 = True
+
     print(f"You are a {player_character.capitalize()} in the Kingdom of New Ross.")
     print(f"The King's daughter has been kidnapped and it's your job to find her and return her to the kingdom.") 
 
+    # runs while players choice hasn't been selected or correctly input
     while confirm1:
         confirm1_input = input("Do you understand your job? (Y / N) ").upper()
         if confirm1_input == "N":
@@ -72,7 +75,10 @@ while player_alive:
 
     print()
     print("On your voluntary journey to save the King's daughter, you encounter a split in the roads...")
+
+    # initiliaze players first impactful game choice
     choice1 = True
+    
     while choice1:
         choice1_input = input("Which way do you go? (L / R): ").upper()
         if choice1_input == "L":
@@ -91,7 +97,14 @@ while player_alive:
         print("and your wanted for stealing all of their renowned mushroom bread!")
         print("You encounter King Toadstool and he wants you executed! What will you do?!")
         
-        mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
+        while mk_choice_running:
+            mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
+            if mk_choice == "ATTACK" or "PERSUADE" or "RUN" or "SEDUCE":
+                mk_choice_running = False
+            else:
+                print("Invalid Option. Try again.")
+                mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
+
         if mk_choice == "Attack":
             if player_stats[0] >= random.randint(0, 16):
                 print("You killed King Toadstool!.. but his soldiers executed you on the spot.")
