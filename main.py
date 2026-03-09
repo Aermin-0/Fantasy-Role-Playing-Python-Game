@@ -95,11 +95,13 @@ while player_alive:
     if environment1 == "Mushroom Kingdom":
         mk_choice_running = True
 
+        print()
         print("Oh no! it seems you've walked right into the Mushroom Kingdom uninvited...")
         print("and your wanted for stealing all of their renowned mushroom bread!")
         print("You encounter King Toadstool and he wants you executed! What will you do?!")
         
         while mk_choice_running:
+            player_stat_info()
             mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
             if mk_choice == "ATTACK" or "PERSUADE" or "RUN" or "SEDUCE":
                 mk_choice_running = False
@@ -107,7 +109,7 @@ while player_alive:
                 print("Invalid Option. Try again.")
                 mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
 
-        if mk_choice == "Attack":
+        if mk_choice == "ATTACK":
             if player_stats[0] >= random.randint(0, 16):
                 print("You killed King Toadstool!.. but his soldiers executed you on the spot.")
                 print("Game Over!")
@@ -116,17 +118,19 @@ while player_alive:
                 print("You missed! and died of embarrasment...")
                 print("Game Over!")
                 player_alive = False
-        elif mk_choice == "Persuade":
+        elif mk_choice == "PERSUADE":
             if player_stats[3] >= random.randint(0, 10):
                 goldgiven_mk = random.randint(250, 501)
                 player_gold += goldgiven_mk
 
                 print("You succesfully persuaded the King with your charisma, claiming you'll")
                 print("return the bread with a small loan of gold from the King!")
+                print()
                 print(f"The King gives you {goldgiven_mk} gold and sends you on your way!")
             else:
                 print("You stuttered and the King laughed in your face...")
                 print("and you died of embarrasment...")
+                print()
                 print("Game Over!")
                 player_alive = False
 
