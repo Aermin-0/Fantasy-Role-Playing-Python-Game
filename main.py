@@ -18,7 +18,7 @@ while player_alive:
     while class_unchosen:
         # Knight is Strong, Endurant, and Evasive.
         if player_character == "KNIGHT":
-            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 15]
+            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 13]
             class_unchosen = False
         # Mage is intelligent, charismatic, dexteric and skilled in arcane.
         elif player_character == "MAGE":
@@ -82,55 +82,89 @@ while player_alive:
     choice1 = True
 
     while choice1:
-        choice1_input = input("Which way do you go? (L / R): ").upper()
-        if choice1_input == "L":
-            environment1 = random.choice(choice1_environments[0:2])
-            print(f"You take the left path and enter: {environment1}")
-            break
-        elif choice1_input == "R":
-            environment1 = random.choice(choice1_environments[2:])
-            print(f"You take the right path and enter: {environment1}")
-            break
-
-    if environment1 == "Mushroom Kingdom":
-        mk_choice_running = True
-
-        print()
-        print("Oh no! it seems you've walked right into the Mushroom Kingdom uninvited...")
-        print("and your wanted for stealing all of their renowned mushroom bread!")
-        print("You encounter King Toadstool and he wants you executed! What will you do?!")
+        choice2 = True
+        while choice2:
+            choice1_input = input("Which way do you go? (L / R): ").upper()
+            if choice1_input == "L":
+                environment1 = random.choice(choice1_environments[0:2])
+                print(f"You take the left path and enter: {environment1}")
+                break
+            elif choice1_input == "R":
+                environment1 = random.choice(choice1_environments[2:])
+                print(f"You take the right path and enter: {environment1}")
+                break
         
-        while mk_choice_running:
-            player_stat_info()
-            mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
-            if mk_choice == "ATTACK" or "PERSUADE" or "RUN" or "SEDUCE":
-                mk_choice_running = False
-            else:
-                print("Invalid Option. Try again.")
+        if environment1 == "Mushroom Kingdom":
+            print()
+            print("Oh no! it seems you've walked right into the Mushroom Kingdom uninvited...")
+            print("and your wanted for stealing all of their renowned mushroom bread!")
+            print("You encounter King Toadstool and he wants you executed! What will you do?!")
+            
+            mk_choice_running = True
+            while mk_choice_running:
+                player_stat_info()
                 mk_choice = input("Attack, Persuade, Run, or.. Seduce? ").upper()
+                if mk_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
+                    mk_choice_running = False
+                else:
+                    print("Invalid Option. Try again.")
 
-        if mk_choice == "ATTACK":
-            if player_stats[0] >= random.randint(0, 16):
-                print("You killed King Toadstool!.. but his soldiers executed you on the spot.")
-                print("Game Over!")
-                player_alive = False
-            else:
-                print("You missed! and died of embarrasment...")
-                print("Game Over!")
-                player_alive = False
-        elif mk_choice == "PERSUADE":
-            if player_stats[3] >= random.randint(0, 10):
-                goldgiven_mk = random.randint(250, 501)
-                player_gold += goldgiven_mk
+            if mk_choice == "ATTACK":
+                if player_stats[0] >= random.randint(0, 16):
+                    print("You killed King Toadstool!.. but his soldiers executed you on the spot.")
+                    print("Game Over!")
+                    player_alive = False
+                    choice1 = False
+                else:
+                    print("You missed! and died of embarrasment...")
+                    print("Game Over!")
+                    player_alive = False
+                    choice1 = False
+                    
+            elif mk_choice == "PERSUADE":
+                if player_stats[3] >= random.randint(0, 10):
+                    goldgiven_mk = random.randint(250, 501)
+                    player_gold += goldgiven_mk
+                    choice1_environments.pop(2)
 
-                print("You succesfully persuaded the King with your charisma, claiming you'll")
-                print("return the bread with a small loan of gold from the King!")
+                    print("You succesfully persuaded the King with your charisma, claiming you'll")
+                    print("return the bread with a small loan of gold from the King!")
+                    print()
+                    print(f"The King gives you {goldgiven_mk} gold and sends you on your way!")
+                else:
+                    print("You stuttered and the King laughed in your face...")
+                    print("and you died of embarrasment...")
+                    print()
+                    print("Game Over!")
+                    player_alive = False
+                    choice1 = False
+
+            elif mk_choice == "RUN":
+                if player_stats[7] >= random.randint(5, 16):
+                    print("You succesfully run away and escape the Kingdom!...")
+                    print("leaving the King embarrased and ashamed for his lack of containment... ")
+                    print()
+                    print("You return to the split in the path...")
+                else:
+                    print("You trip and fall while trying to run...")
+                    print("The King's guards arrest you and you spend the rest of your life in a cell... embarrasing.")
+                    print()
+                    print("Game Over!")
+                    player_alive = False
+                    choice1 = False
+
+            elif mk_choice == "SEDUCE":
+                print("You attempt to seduce the King... ")
+                print("and it works! You spend the rest of your life as the King's servant, happily ever after!")
                 print()
-                print(f"The King gives you {goldgiven_mk} gold and sends you on your way!")
-            else:
-                print("You stuttered and the King laughed in your face...")
-                print("and you died of embarrasment...")
-                print()
                 print("Game Over!")
                 player_alive = False
+                choice1 = False
 
+            else:
+                print("Not a valid choice. Try again.")
+
+        elif environment1 == "Forest":
+            print()
+            print("You took a cut in the path and have gotten lost in the forest...")
+            print("while trying to find a way out")
