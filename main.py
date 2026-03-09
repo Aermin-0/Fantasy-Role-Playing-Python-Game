@@ -124,7 +124,6 @@ while player_alive:
                     print("Game Over!")
                     player_alive = False
                     choice1 = False
-
             elif mk_choice == "PERSUADE":
                 if player_stats[3] >= random.randint(0, 10):
                     goldgiven_mk = random.randint(250, 501)
@@ -142,7 +141,6 @@ while player_alive:
                     print("Game Over!")
                     player_alive = False
                     choice1 = False 
-
             elif mk_choice == "RUN":
                 if player_stats[7] >= random.randint(5, 16):
                     print("You succesfully run away and escape the Kingdom!...")
@@ -156,7 +154,6 @@ while player_alive:
                     print("Game Over!")
                     player_alive = False
                     choice1 = False
-
             elif mk_choice == "SEDUCE":
                 print("You attempt to seduce the King... ")
                 print("and it works! You spend the rest of your life as the King's servant, happily ever after!")
@@ -179,8 +176,6 @@ while player_alive:
             black_bear_fight = True
 
             while black_bear_fight:
-                if player_hp <= 0 or black_bear_hp <= 0:
-                    black_bear_fight = False
 
                 fr_choice_running = True
                 print(f"Black Bear HP: {black_bear_hp}/100")
@@ -197,20 +192,43 @@ while player_alive:
                         dmg_bb = random.randint(0, 101)
                         print(f"You dealt {dmg_bb} damage to the bear!")
                         black_bear_hp -= dmg_bb
+                        if black_bear_hp <= 0:
+                            print("You defeated the Wild Black Bear!")
+                            black_bear_fight = False
+                            choice1 = False
+                            break
                     else:
                         dmg_player_bb = random.randint(0, 101)
                         print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
                         player_hp -= dmg_player_bb
-
-                if fr_choice == "PERSUADE":
+                        if player_hp <= 0:
+                            print("The Wild Black Bear defeated you!")
+                            print("Game Over!")
+                            black_bear_fight = False
+                            choice1 = False
+                            player_alive = False
+                elif fr_choice == "PERSUADE":
                     if player_stats[3] >= random.randint(5, 16) and player_stats[6] >= random.randint(5, 16):
-                        black_bear_fight = False
                         print("You succesfully communicated with the bear in 'bear' language...")
                         print("the bear understood you were just a mere traveller and let you pass...")
                         print()
-            
-            if black_bear_hp <= 0:
-                print("You defeated the Wild Black Bear!")
-                choice1 = False
+                        black_bear_fight = False
+                        choice1 = False
+                elif fr_choice == "RUN":
+                    if player_stats[7] >= random.randint(0, 11):
+                        black_bear_fight = False
+                        choice1 = False
+                        print("You successfully evaded the bear and ran away!")
+                        print()
+                elif fr_choice == "SEDUCE":
+                    print("You attempted to seduce the Wild Black Bear and in return...")
+                    print("the Wild Black Bear ate you... nice try... i guess...")
+                    print()
+                    print("Game Over!")
+                    black_bear_fight = False
+                    choice1 = False
+                    player_alive = False
 
-            # comment
+            # If the fight ended with a win/escape/death, stop the outer choice loop too
+            if not choice1:
+                break
