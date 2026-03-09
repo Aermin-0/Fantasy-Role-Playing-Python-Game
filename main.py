@@ -36,21 +36,23 @@ while player_alive:
             print("This is not an available class, please choose again.")
             player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
         
-    # Display player class and their assigned stats    
-    print()
-    print("Class:", player_character.capitalize())
-    print("------------------")
-    print("       Stats      ")
-    print("------------------")
-    print(f"Strength: {player_stats[0]}")
-    print(f"Speed: {player_stats[1]}")
-    print(f"Dexterity: {player_stats[2]}")
-    print(f"Charisma: {player_stats[3]}")
-    print(f"Endurance: {player_stats[4]}")
-    print(f"Arcane: {player_stats[5]}")
-    print(f"Intelligence: {player_stats[6]}")
-    print(f"Evasiveness: {player_stats[7]}")
-    print()
+    # Display player class and their assigned stats
+    def player_stat_info():    
+        print()
+        print("Class:", player_character.capitalize())
+        print("------------------")
+        print("       Stats      ")
+        print("------------------")
+        print(f"Strength: {player_stats[0]}")
+        print(f"Speed: {player_stats[1]}")
+        print(f"Dexterity: {player_stats[2]}")
+        print(f"Charisma: {player_stats[3]}")
+        print(f"Endurance: {player_stats[4]}")
+        print(f"Arcane: {player_stats[5]}")
+        print(f"Intelligence: {player_stats[6]}")
+        print(f"Evasiveness: {player_stats[7]}")
+        print()
+    player_stat_info()
 
     # initiliaze the players first confirmation
     confirm1 = True
@@ -127,3 +129,4 @@ while player_alive:
                 print("and you died of embarrasment...")
                 print("Game Over!")
                 player_alive = False
+
