@@ -141,7 +141,7 @@ while player_alive:
                     print()
                     print("Game Over!")
                     player_alive = False
-                    choice1_2 and choice1 = False
+                    choice1 = False 
 
             elif mk_choice == "RUN":
                 if player_stats[7] >= random.randint(5, 16):
@@ -155,7 +155,7 @@ while player_alive:
                     print()
                     print("Game Over!")
                     player_alive = False
-                    choice1 and choice1_2 = False
+                    choice1 = False
 
             elif mk_choice == "SEDUCE":
                 print("You attempt to seduce the King... ")
@@ -204,12 +204,13 @@ while player_alive:
 
                 if fr_choice == "PERSUADE":
                     if player_stats[3] >= random.randint(5, 16) and player_stats[6] >= random.randint(5, 16):
+                        black_bear_fight = False
                         print("You succesfully communicated with the bear in 'bear' language...")
                         print("the bear understood you were just a mere traveller and let you pass...")
-                        break
+                        print()
             
             if black_bear_hp <= 0:
                 print("You defeated the Wild Black Bear!")
-                choice1 and choice1_2 = False
+                choice1 = False
 
             
