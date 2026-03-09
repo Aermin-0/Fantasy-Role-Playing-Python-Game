@@ -29,11 +29,12 @@ while player_alive:
             class_unchosen = False
         # Ninja is fast, dexteric, evasive.
         elif player_character == "NINJA":
-            player_stats[0:] = [18, 20, 20, 20, 20, 20, 20, 20]
+            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 16]
             class_unchosen = False
         # Prince is charismatic, intelligent and fast.
         elif player_character == "PRINCE":
-            player_stats[0:] = [18, 20, 20, 20, 20, 20, 20, 20]
+            player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4]
+            player_gold = 350
             class_unchosen = False
         else:
             print("This is not an available class, please choose again.")
@@ -43,7 +44,8 @@ while player_alive:
     def player_stat_info():    
         print()
         print("Class:", player_character.capitalize())
-        print("Health:", player_hp,"/100")
+        print("Health:", player_hp,"/ 100")
+        print("Gold:", player_gold)
         print("------------------")
         print("       Stats      ")
         print("------------------")
@@ -228,7 +230,7 @@ while player_alive:
                     choice1 = False
                     player_alive = False
 
-            # ff the fight ended with a win/escape/death, stop the outer choice loop too
+            # once fight ends, choice1 loop is exited
             if not choice1:
                 break
 
