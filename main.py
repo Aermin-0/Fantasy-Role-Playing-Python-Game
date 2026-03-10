@@ -1,4 +1,5 @@
 # D&D Game
+
 import random
 
 player_alive = True
@@ -187,14 +188,19 @@ while player_alive:
             print("while trying to find a way out.. you encounter a Wild Black Bear! What will you do?")
             print()
 
-            black_bear_hp = 100
+            if difficulty == "HARD":
+                black_bear_hp = 400
+                black_bear_hpmax = 400
+            else:
+                black_bear_hp = 200
+                black_bear_hpmax = 200
 
             black_bear_fight = True
 
             while black_bear_fight:
 
                 fr_choice_running = True
-                print(f"Black Bear HP: {black_bear_hp}/100")
+                print(f"Black Bear HP: {black_bear_hp}/{black_bear_hpmax}")
                 while fr_choice_running:
                     player_stat_info()
                     fr_choice = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
@@ -202,6 +208,7 @@ while player_alive:
                         fr_choice_running = False
                     else:
                         print("Invalid Option. Try again.")
+                        pass
                 
                 if fr_choice == "ATTACK":
                     if player_stats[0] >= random.randint(5,15):
@@ -257,10 +264,66 @@ while player_alive:
                     black_bear_fight = False
                     choice1 = False
                     player_alive = False
+        
+        elif environment1 == "Desert":
+            print()
+            print("You crossed a hill, and proceeded to swim an ocean, now you're in the middle of the desert...")
+            print("while in the desert, you encounter a Lion! What do you do?")
+
+            boss_health = [400, 500, 600, 700]
+
+            if difficulty == "HARD":
+                desert_boss_hp = random.choice(boss_health)
+                desert_boss_hpmax = desert_boss_hp
+            else:
+                desert_boss_hp = 200
+                desert_boss_hpmax = 200
+
+            while True:
+                print()
+                print(f"Lion's Health: {desert_boss_hp}/{desert_boss_hpmax}")
+                while True:
+                    player_stat_info()
+                    dr_choice = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
+                    if dr_choice in ("ATTACK, PERSUADE, RUN, SEDUCE"):
+                        break
+                    else:
+                        print("Invalid option. Try again.")
+
+                if dr_choice == "ATTACK":
+                    if player_stats[0] >= random.randint(0,15) and player_stats[2] >= random.randint(0,15):
+                        dmg_dl = random.randint(0, 101)
+                        print(f"You dealt {dmg_dl} damage to the Lion!")
+                        desert_boss_hp -= dmg_dl
+                    else:
+                        dl_dmg_pl = random.randint(0,51)
+                        print(f"You failed to hit! Lion dealt {dl_dmg_pl} damange to you!")
+                        player_hp -= dl_dmg_pl
+                elif dr_choice == "PERSUADE":
+                    pass
+
+                if desert_boss_hp <= 0:
+                    if difficulty == "HARD":
+                        player_gold += random.randint(0, 201) * 2
+                    else:
+                        player_gold += random.randint(0, 201)
+
+                    print("You defeated the desert's lion!")
+                    print(f"You now have {player_gold} gold.")
+                    choice1 = False
+                    break
+
+                elif player_hp <= 0:
+                    print("The lion defeated you!")
+                    print()
+                    print("Game Over!")
+                    choice1 = False
+                    player_alive = False
+                    break
 
             # once fight ends, choice1 loop is exited
-            if not choice1:
-                break
+        if not choice1:
+            break
 
 # To Do:
 # Cave, Desert, and Swamp
