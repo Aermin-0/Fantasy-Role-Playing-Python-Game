@@ -6,8 +6,8 @@ player_alive = True
 
 while player_alive:
     print("Welcome to the Dungeons & Dragons game!")
+    # set game difficulty
     while True:
-        # set game difficulty
         difficulty = input("Enter your difficulty (Easy / Hard): ").upper()
         if difficulty == "EASY":
             break
@@ -15,7 +15,7 @@ while player_alive:
             break
         else:
             print("Invalid option. Try again.")
-            pass
+
     # player chooses their class
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
 
@@ -29,19 +29,20 @@ while player_alive:
     # initiliaze players health amount
     player_hp = 100
 
+    # player classes
     class_unchosen = True
     while class_unchosen:
         # Knight is Strong, Endurant, and Evasive.
         if player_character == "KNIGHT":
-            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 6]
+            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
             class_unchosen = False
         # Mage is intelligent, charismatic, dexteric and skilled in arcane.
         elif player_character == "MAGE":
-            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 6]
+            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
             class_unchosen = False
         # Ninja is fast, dexteric, evasive.
         elif player_character == "NINJA":
-            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 6]
+            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
             class_unchosen = False
         # Prince is charismatic, intelligent and fast.
         elif player_character == "PRINCE":
@@ -240,6 +241,7 @@ while player_alive:
                     if player_stats[3] >= random.randint(5, 16) and player_stats[6] >= random.randint(5, 16):
                         print("You succesfully communicated with the bear in 'bear' language...")
                         print("the bear understood you were just a mere traveller and let you pass...")
+                        player_stat_info()
                         print()
                         black_bear_fight = False
                         choice1 = False
@@ -248,12 +250,14 @@ while player_alive:
                         black_bear_fight = False
                         choice1 = False
                         print("You successfully evaded the bear and ran away!")
+                        player_stat_info()
                         print()
                     else:
                         print("You tried to evade the Wild Black Bear, instead you jumped right into his mouth..")
                         print("..maybe next time.")
                         print()
                         print("Game Over!")
+                        player_stat_info()
                         black_bear_fight = False
                         choice1 = False
                         player_alive = False
@@ -262,6 +266,7 @@ while player_alive:
                     print("the Wild Black Bear ate you... nice try... i guess...")
                     print()
                     print("Game Over!")
+                    player_stat_info()
                     black_bear_fight = False
                     choice1 = False
                     player_alive = False
@@ -306,7 +311,14 @@ while player_alive:
                     print(f"the lion lunges and deals {dl_dmg_pl} damage to you!")
                     player_hp -= dl_dmg_pl
                 elif dr_choice == "RUN":
-                    if
+                    if player_stats[7] >= random.randint(0,11) and player_stats[8] >= random.randint(0,11):
+                        print("You successfully ran away!")
+                        break
+                    else:
+                        dl_dmg_pl = random.randint(0,51)
+                        print("You tried to run away but failed!")
+                        print(f"The lion dealt {dl_dmg_pl} damage to you!")
+                        player_hp -= dl_dmg_pl
 
                 if desert_boss_hp <= 0:
                     if difficulty == "HARD":
@@ -314,12 +326,16 @@ while player_alive:
                     else:
                         player_gold += random.randint(0, 201)
 
+                    player_stat_info()
+
                     print("You defeated the desert's lion!")
                     print(f"You now have {player_gold} gold.")
                     choice1 = False
                     break
 
                 elif player_hp <= 0:
+                    player_stat_info()
+
                     print("The lion defeated you!")
                     print()
                     print("Game Over!")
@@ -331,6 +347,11 @@ while player_alive:
         if not choice1:
             break
 
+    while True:
+        print("You have arrived at the Merchants!...")
+        merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
+        while True:
+
 # To Do:
-# Cave, Desert, and Swamp
+# Cave and Swamp
 # Shop system after choice1 is exited.
