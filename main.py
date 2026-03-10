@@ -20,8 +20,8 @@ while player_alive:
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
 
     # initiliaze player stats
-    # 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness
-    player_stats = [0, 0, 0, 0 ,0, 0, 0, 0]
+    # 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness, 9: Luck
+    player_stats = [0, 0, 0, 0 ,0, 0, 0, 0, 0]
 
     # initiliaze players currency amount
     player_gold = 0
@@ -33,19 +33,19 @@ while player_alive:
     while class_unchosen:
         # Knight is Strong, Endurant, and Evasive.
         if player_character == "KNIGHT":
-            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 13]
+            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 6]
             class_unchosen = False
         # Mage is intelligent, charismatic, dexteric and skilled in arcane.
         elif player_character == "MAGE":
-            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7]
+            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 6]
             class_unchosen = False
         # Ninja is fast, dexteric, evasive.
         elif player_character == "NINJA":
-            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 16]
+            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 6]
             class_unchosen = False
         # Prince is charismatic, intelligent and fast.
         elif player_character == "PRINCE":
-            player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4]
+            player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
             player_gold = 350
             class_unchosen = False
         else:
@@ -69,6 +69,7 @@ while player_alive:
         print(f"Arcane: {player_stats[5]}")
         print(f"Intelligence: {player_stats[6]}")
         print(f"Evasiveness: {player_stats[7]}")
+        print(f"Luck: {player_stats[8]}")
         print()
     player_stat_info()
 
@@ -300,7 +301,12 @@ while player_alive:
                         print(f"You failed to hit! Lion dealt {dl_dmg_pl} damange to you!")
                         player_hp -= dl_dmg_pl
                 elif dr_choice == "PERSUADE":
-                    pass
+                    dl_dmg_pl = random.randint(0,51)
+                    print("While attempting to persuade the lion for some reason...")
+                    print(f"the lion lunges and deals {dl_dmg_pl} damage to you!")
+                    player_hp -= dl_dmg_pl
+                elif dr_choice == "RUN":
+                    if
 
                 if desert_boss_hp <= 0:
                     if difficulty == "HARD":
