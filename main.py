@@ -5,6 +5,17 @@ player_alive = True
 
 while player_alive:
     print("Welcome to the Dungeons & Dragons game!")
+    while True:
+        # set game difficulty
+        difficulty = input("Enter your difficulty (Easy / Hard): ").upper()
+        if difficulty == "EASY":
+            break
+        elif difficulty == "HARD":
+            break
+        else:
+            print("Invalid option. Try again.")
+            pass
+    # player chooses their class
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
 
     # initiliaze player stats
@@ -88,8 +99,7 @@ while player_alive:
     choice1 = True
 
     while choice1:
-        choice1_2 = True
-        while choice1_2:
+        while True:
             choice1_input = input("Which way do you go? (L / R): ").upper()
             if choice1_input == "L":
                 environment1 = random.choice(choice1_environments[0:2])
@@ -128,7 +138,10 @@ while player_alive:
                     choice1 = False
             elif mk_choice == "PERSUADE":
                 if player_stats[3] >= random.randint(0, 10):
-                    goldgiven_mk = random.randint(250, 501)
+                    if difficulty == "HARD":
+                        goldgiven_mk = random.randint(250, 501) * 2
+                    else:
+                        goldgiven_mk = random.randint(250, 501)
                     player_gold += goldgiven_mk
                     choice1_environments.pop(2)
 
@@ -136,6 +149,7 @@ while player_alive:
                     print("return the bread with a small loan of gold from the King!")
                     print()
                     print(f"The King gives you {goldgiven_mk} gold and sends you on your way!")
+                    print(f"You now have {player_gold} gold!")
                 else:
                     print("You stuttered and the King laughed in your face...")
                     print("and you died of embarrasment...")
@@ -198,6 +212,12 @@ while player_alive:
                             print("You defeated the Wild Black Bear!")
                             black_bear_fight = False
                             choice1 = False
+                            if difficulty == "HARD":
+                                player_gold += random.randint(0, 201) * 2
+                            else:
+                                player_gold += random.randint(0, 201)
+                            print(f"You now have {player_gold} gold!")
+
                     else:
                         dmg_player_bb = random.randint(0, 101)
                         print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
@@ -221,6 +241,14 @@ while player_alive:
                         choice1 = False
                         print("You successfully evaded the bear and ran away!")
                         print()
+                    else:
+                        print("You tried to evade the Wild Black Bear, instead you jumped right into his mouth..")
+                        print("..maybe next time.")
+                        print()
+                        print("Game Over!")
+                        black_bear_fight = False
+                        choice1 = False
+                        player_alive = False
                 elif fr_choice == "SEDUCE":
                     print("You attempted to seduce the Wild Black Bear and in return...")
                     print("the Wild Black Bear ate you... nice try... i guess...")
