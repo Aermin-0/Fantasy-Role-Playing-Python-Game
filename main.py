@@ -232,10 +232,8 @@ while player_alive:
                 black_bear_hp = 200
                 black_bear_hpmax = 200
 
-            black_bear_fight = True
 
             while True:
-
                 fr_choice_running = True
                 print(f"Black Bear HP: {black_bear_hp}/{black_bear_hpmax}")
                 while fr_choice_running:
@@ -245,14 +243,27 @@ while player_alive:
                         fr_choice_running = False
                     else:
                         print("Invalid Option. Try again.")
-                        pass
                 
                 if fr_choice == "ATTACK":
-
-                    if player_stats[0] >= random.randint(5,15):
+                    if player_stats[0] >= random.randint(0, 20):
                         dmg_bb = random.randint(0, 101)
                         print(f"You dealt {dmg_bb} damage to the bear!")
                         black_bear_hp -= dmg_bb
+                        if black_bear_hp <= 0:
+                            print("You defeated the Wild Black Bear!")
+                            if difficulty == "HARD":
+                                player_gold += random.randint(0, 201) * 2
+                                print()
+                                print(f"You now have {player_gold} gold!")
+                                print()
+                            else:
+                                player_gold += random.randint(0, 201)
+                                print()
+                                print(f"You now have {player_gold} gold!")
+                                print()
+                            choice1 = False
+                            break
+
                     else:
                         dmg_player_bb = random.randint(0, 101)
                         print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
@@ -297,16 +308,6 @@ while player_alive:
                     player_alive = False
                     choice1 = False
                     break
-
-                elif black_bear_hp <= 0:
-                    print("You defeated the Wild Black Bear!")
-                    if difficulty == "HARD":
-                        player_gold += random.randint(0, 201) * 2
-                    else:
-                        player_gold += random.randint(0, 201)
-                        print(f"You now have {player_gold} gold!")
-                    black_bear_fight = False
-                    choice1 = False
         
         elif environment1 == "Desert":
             print()
