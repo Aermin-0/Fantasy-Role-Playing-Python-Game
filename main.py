@@ -14,6 +14,9 @@ player_gold = 0
 # initiliaze players health amount
 player_hp = 100
 
+#player inventory list
+player_inventory = []
+
 print("Welcome to the Dungeons & Dragons Python Game!")
 
 # set game difficulty
@@ -106,10 +109,6 @@ def player_stat_info():
     print()
 
 
-
-#player inventory list
-player_inventory = []
-
 while player_alive:
     player_stat_info()
 
@@ -125,7 +124,7 @@ while player_alive:
             print("Fantastic, onwards soldier!")
             break
         else:
-            understand_input = input("I'm afraid you mispoke... try again. (Y / N)").upper()
+            understand_input = input("I'm afraid you mispoke... try again. (Y / N) ").upper()
 
     # initiliaze availabe environments for choice one
     choice1_environments = ["Forest", "Desert", "Mushroom Kingdom", "Forest", "Desert", "Swamp", "Cave"]
