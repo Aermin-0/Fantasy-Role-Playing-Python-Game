@@ -4,93 +4,90 @@ import random
 
 player_alive = True
 
-while player_alive:
-    print("Welcome to the Dungeons & Dragons game!")
-    # set game difficulty
-    while True:
-        difficulty = input("Enter your difficulty (Easy / Hard): ").upper()
-        if difficulty == "EASY":
-            break
-        elif difficulty == "HARD":
-            break
-        else:
-            print("Invalid option. Try again.")
+# initiliaze player stats
+# 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness, 9: Luck
+player_stats = [0, 0, 0, 0 ,0, 0, 0, 0, 0]
 
-    # player chooses their class
+# initiliaze players currency amount
+player_gold = 0
+
+# initiliaze players health amount
+player_hp = 100
+
+
+print("Welcome to the Dungeons & Dragons Python Game!")
+
+# set game difficulty
+while True:
+    difficulty = input("Enter your difficulty (Easy / Hard): ").upper()
+    if difficulty == "EASY":
+        break
+    elif difficulty == "HARD":
+        break
+    else:
+        print("Invalid option. Try again.")
+
+# player classes
+while True:
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
+    # Knight is Strong, Endurant, and Evasive.
+    if player_character == "KNIGHT":
+        player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
+        break
+    # Mage is intelligent, charismatic, dexteric and skilled in arcane.
+    elif player_character == "MAGE":
+        player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
+        break
+    # Ninja is fast, dexteric, evasive.
+    elif player_character == "NINJA":
+        player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
+        break
+    # Prince is charismatic, intelligent and fast.
+    elif player_character == "PRINCE":
+        player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
+        player_gold = 350
+        break
+    else:
+        print("This is not an available class, please choose again.")
 
-    # initiliaze player stats
-    # 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness, 9: Luck
-    player_stats = [0, 0, 0, 0 ,0, 0, 0, 0, 0]
+# function to display player stats
+def player_stat_info():    
+    print()
+    print("Class:", player_character.capitalize())
+    print("Health:", player_hp,"/ 100")
+    print("Gold:", player_gold)
+    print("------------------")
+    print("       Stats      ")
+    print("------------------")
+    print(f"Strength: {player_stats[0]}")
+    print(f"Speed: {player_stats[1]}")
+    print(f"Dexterity: {player_stats[2]}")
+    print(f"Charisma: {player_stats[3]}")
+    print(f"Endurance: {player_stats[4]}")
+    print(f"Arcane: {player_stats[5]}")
+    print(f"Intelligence: {player_stats[6]}")
+    print(f"Evasiveness: {player_stats[7]}")
+    print(f"Luck: {player_stats[8]}")
+    print()
 
-    # initiliaze players currency amount
-    player_gold = 0
 
-    # initiliaze players health amount
-    player_hp = 100
 
-    # player classes
-    class_unchosen = True
-    while class_unchosen:
-        # Knight is Strong, Endurant, and Evasive.
-        if player_character == "KNIGHT":
-            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
-            class_unchosen = False
-        # Mage is intelligent, charismatic, dexteric and skilled in arcane.
-        elif player_character == "MAGE":
-            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
-            class_unchosen = False
-        # Ninja is fast, dexteric, evasive.
-        elif player_character == "NINJA":
-            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
-            class_unchosen = False
-        # Prince is charismatic, intelligent and fast.
-        elif player_character == "PRINCE":
-            player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
-            player_gold = 350
-            class_unchosen = False
-        else:
-            print("This is not an available class, please choose again.")
-            player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
-        
-    # Display player class and their assigned stats
-    def player_stat_info():    
-        print()
-        print("Class:", player_character.capitalize())
-        print("Health:", player_hp,"/ 100")
-        print("Gold:", player_gold)
-        print("------------------")
-        print("       Stats      ")
-        print("------------------")
-        print(f"Strength: {player_stats[0]}")
-        print(f"Speed: {player_stats[1]}")
-        print(f"Dexterity: {player_stats[2]}")
-        print(f"Charisma: {player_stats[3]}")
-        print(f"Endurance: {player_stats[4]}")
-        print(f"Arcane: {player_stats[5]}")
-        print(f"Intelligence: {player_stats[6]}")
-        print(f"Evasiveness: {player_stats[7]}")
-        print(f"Luck: {player_stats[8]}")
-        print()
+while player_alive:
     player_stat_info()
-
-    # initiliaze the players first confirmation
-    confirm1 = True
 
     print(f"You are a {player_character.capitalize()} in the Kingdom of New Ross.")
     print(f"The King's daughter has been kidnapped and it's your job to find her and return her to the kingdom.") 
 
-    # runs while players choice hasn't been selected or correctly input
-    while confirm1:
-        confirm1_input = input("Do you understand your job? (Y / N) ").upper()
-        if confirm1_input == "N":
+    while True:
+        understand_input = input("Do you understand your job? (Y / N) ").upper()
+        if understand_input == "N":
             print("Too bad, onwards soldier!")
             break
-        elif confirm1_input == "Y":
+        elif understand_input == "Y":
             print("Fantastic, onwards soldier!")
             break
         else:
-            confirm1_input = input("I'm afraid you mispoke... try again. (Y / N)").upper()
+            understand_input = input("I'm afraid you mispoke... try again. (Y / N)").upper()
 
     # initiliaze availabe environments for choice one
     choice1_environments = ["Forest", "Desert", "Mushroom Kingdom", "Forest", "Desert", "Swamp", "Cave"]
