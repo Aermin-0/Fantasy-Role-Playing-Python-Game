@@ -1,4 +1,4 @@
-# D&D Game
+# Dungeons & Dragons Python Game
 
 import random
 
