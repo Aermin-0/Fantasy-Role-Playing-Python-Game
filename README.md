@@ -2,4 +2,4 @@
 
 A terminal-based fantasy role-playing game inspired by Dungeons &amp; Dragons, coded in Python.
 
-Developed by Ærmin.
+Developed by Ærmin and ReynoBTW.
