@@ -105,15 +105,15 @@ while player_alive:
         while True:
             choice1_input = input("Which way do you go? (L / R): ").upper()
             if choice1_input == "L":
-                environment = random.choice(choice1_environments[0:2])
-                print(f"You take the left path and enter: {environment}")
+                environment1 = random.choice(choice1_environments[0:2])
+                print(f"You take the left path and enter: {environment1}")
                 break
             elif choice1_input == "R":
-                environment = random.choice(choice1_environments[2:])
-                print(f"You take the right path and enter: {environment}")
+                environment1 = random.choice(choice1_environments[2:])
+                print(f"You take the right path and enter: {environment1}")
                 break
         
-        if environment == "Mushroom Kingdom":
+        if environment1 == "Mushroom Kingdom":
             print()
             print("Oh no! it seems you've walked right into the Mushroom Kingdom uninvited...")
             print("and your wanted for stealing all of their renowned mushroom bread!")
@@ -184,7 +184,7 @@ while player_alive:
             else:
                 print("Not a valid choice. Try again.")
 
-        elif environment == "Forest":
+        elif environment1 == "Forest":
             print()
             print("You took a cut in the path and have gotten lost in the forest...")
             print("while trying to find a way out.. you encounter a Wild Black Bear! What will you do?")
@@ -271,7 +271,7 @@ while player_alive:
                     choice1 = False
                     player_alive = False
         
-        elif environment == "Desert":
+        elif environment1 == "Desert":
             print()
             print("You crossed a hill, and proceeded to swim an ocean, now you're in the middle of the desert...")
             print("while in the desert, you encounter a Lion! What do you do?")
@@ -346,7 +346,6 @@ while player_alive:
             # once fight ends, choice1 loop is exited
         if not choice1:
             break
-    # if player dead, outer loop exited
     if not player_alive:
         break
 
