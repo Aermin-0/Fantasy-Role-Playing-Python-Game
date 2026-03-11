@@ -23,7 +23,9 @@ player_hp = 100
 #player inventory list
 player_inventory = []
 
-print("Welcome to the Dungeons & Dragons Python Game!")
+print()
+print("Welcome to the Dungeons & Dragons Python Game! \nA program developed by Ærmin and ReynoBTW.")
+print()
 
 # set game difficulty
 while True:
