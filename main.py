@@ -8,6 +8,12 @@ player_alive = True
 # 1: Strength, 2: Speed, 3: Dexterity, 4: Charisma, 5: Endurance, 6: Arcane, 7: Intelligence, 8: Evasiveness, 9: Luck
 player_stats = [0, 0, 0, 0 ,0, 0, 0, 0, 0]
 
+knight_stats = [18, 7, 9, 6, 17, 3, 8, 8, 6]
+mage_stats = [4, 6, 16, 7, 6, 18, 17, 7, 6]
+ninja_stats = [13, 18, 17, 9, 7, 2, 12, 15, 6]
+prince_stats = [7, 17, 8, 19, 6, 0, 19, 4, 10]
+
+
 # initiliaze players currency amount
 player_gold = 0
 
@@ -30,6 +36,23 @@ while True:
     else:
         print("Invalid option. Try again.")
 
+# Display player class and their assigned stats
+def player_stat_info_preview(x):
+    print()
+    print("------------------")
+    print("       Stats      ")
+    print("------------------")
+    print(f"Strength: {x[0]}")
+    print(f"Speed: {x[1]}")
+    print(f"Dexterity: {x[2]}")
+    print(f"Charisma: {x[3]}")
+    print(f"Endurance: {x[4]}")
+    print(f"Arcane: {x[5]}")
+    print(f"Intelligence: {x[6]}")
+    print(f"Evasiveness: {x[7]}")
+    print(f"Luck: {x[8]}")
+    print()
+
 # player classes
 class_unchosen = True
 player_character = ""
@@ -38,6 +61,7 @@ while class_unchosen:
     # Knight is Strong, Endurant, and Evasive.
     if player_character == "KNIGHT":
         while True:
+            player_stat_info_preview(knight_stats)
             confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
             if confirm_pc == "Y":
                 player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
@@ -50,6 +74,7 @@ while class_unchosen:
     # Mage is intelligent, charismatic, dexteric and skilled in arcane.
     elif player_character == "MAGE":
         while True:
+            player_stat_info_preview(mage_stats)
             confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
             if confirm_pc == "Y":
                 player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
@@ -62,6 +87,7 @@ while class_unchosen:
     # Ninja is fast, dexteric, evasive.
     elif player_character == "NINJA":
         while True:
+            player_stat_info_preview(ninja_stats)
             confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
             if confirm_pc == "Y":
                 player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
@@ -74,6 +100,7 @@ while class_unchosen:
     # Prince is charismatic, intelligent and fast.
     elif player_character == "PRINCE":
         while True:
+            player_stat_info_preview(prince_stats)
             confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
             if confirm_pc == "Y":            
                 player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
@@ -87,7 +114,6 @@ while class_unchosen:
     else:
         print("This is not an available class, please choose again.")
 
-# Display player class and their assigned stats
 def player_stat_info():    
     print()
     print("Class:", player_character.capitalize())
@@ -118,12 +144,15 @@ while player_alive:
     while True:
         understand_input = input("Do you understand your job? (Y / N) ").upper()
         if understand_input == "N":
+            print()
             print("Too bad, onwards soldier!")
             break
         elif understand_input == "Y":
+            print()
             print("Fantastic, onwards soldier!")
             break
         else:
+            print()
             understand_input = input("I'm afraid you mispoke... try again. (Y / N) ").upper()
 
     # initiliaze availabe environments for choice one
