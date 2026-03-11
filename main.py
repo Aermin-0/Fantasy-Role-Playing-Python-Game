@@ -179,7 +179,7 @@ while player_alive:
                 print()
                 print("Game Over!")
                 player_alive = False
-                choice1 = False
+                break
 
             else:
                 print("Not a valid choice. Try again.")
@@ -346,11 +346,14 @@ while player_alive:
             # once fight ends, choice1 loop is exited
         if not choice1:
             break
+    if not player_alive:
+        break
 
     while True:
         print("You have arrived at the Merchants!...")
         merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
+            pass
 
 # To Do:
 # Cave and Swamp
