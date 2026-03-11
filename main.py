@@ -38,7 +38,6 @@ while True:
 
 # Display player class and their assigned stats
 def player_stat_info_preview(x):
-    print()
     print("------------------")
     print("       Stats      ")
     print("------------------")
