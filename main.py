@@ -91,6 +91,53 @@ def player_stat_info():
 
 
 
+    #player inventory list
+    player_inventory = []
+
+    # player classes
+    class_unchosen = True
+    while class_unchosen:
+        # Knight is Strong, Endurant, and Evasive.
+        if player_character == "KNIGHT":
+            player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
+            class_unchosen = False
+        # Mage is intelligent, charismatic, dexteric and skilled in arcane.
+        elif player_character == "MAGE":
+            player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
+            class_unchosen = False
+        # Ninja is fast, dexteric, evasive.
+        elif player_character == "NINJA":
+            player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
+            class_unchosen = False
+        # Prince is charismatic, intelligent and fast.
+        elif player_character == "PRINCE":
+            player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
+            player_gold = 350
+            class_unchosen = False
+        else:
+            print("This is not an available class, please choose again.")
+            player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
+        
+    # Display player class and their assigned stats
+    def player_stat_info():    
+        print()
+        print("Class:", player_character.capitalize())
+        print("Health:", player_hp,"/ 100")
+        print("Inventory:",player_inventory)
+        print("Gold:", player_gold)
+        print("------------------")
+        print("       Stats      ")
+        print("------------------")
+        print(f"Strength: {player_stats[0]}")
+        print(f"Speed: {player_stats[1]}")
+        print(f"Dexterity: {player_stats[2]}")
+        print(f"Charisma: {player_stats[3]}")
+        print(f"Endurance: {player_stats[4]}")
+        print(f"Arcane: {player_stats[5]}")
+        print(f"Intelligence: {player_stats[6]}")
+        print(f"Evasiveness: {player_stats[7]}")
+        print(f"Luck: {player_stats[8]}")
+        print()
 while player_alive:
     player_stat_info()
 
@@ -371,7 +418,39 @@ while player_alive:
         print("You have arrived at the Merchants!...")
         merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
-            pass
+            player_stat_info()
+            while True:
+                Shop_selection = input("Which item would you like to purchase? \n (Rusty Sword - 100 Gold) " \
+                "\n (Health Potion - 150 Gold) \n (Cracked Armour - 100 Gold) \n (Lottery Ticket - 50 Gold) \n").upper()
+                if Shop_selection in ("RUSTY SWORD, HEALTH POTION, CRACKED ARMOUR, LOTTERY TICKET"):
+                    break 
+                else:
+                    print("Invalid option, please choose again ")
+            if Shop_selection == "RUSTY SWORD":
+                player_inventory.append("RUSTY SWORD")
+                break
+
+            elif Shop_selection == "HEALTH POTION":
+                player_inventory.append("HEALTH POTION")
+                break
+            
+            elif Shop_selection == "CRACKED ARMOUR":
+                player_inventory.append("CRACKED ARMOUR")
+                break
+            elif Shop_selection == "LOTTERY TICKET":
+                player_inventory.append("LOTTERY TICKET")
+                break
+
+                  
+
+            
+
+
+
+               
+            
+                
+
 
 # To Do:
 # Cave and Swamp
