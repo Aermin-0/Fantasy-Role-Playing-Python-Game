@@ -351,6 +351,7 @@ while player_alive:
         print("You have arrived at the Merchants!...")
         merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
+            pass
 
 # To Do:
 # Cave and Swamp
