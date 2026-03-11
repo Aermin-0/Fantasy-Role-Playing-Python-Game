@@ -57,15 +57,29 @@ while class_unchosen:
                 print("Invalid option. Try again: ")
     # Ninja is fast, dexteric, evasive.
     elif player_character == "NINJA":
-        confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
-        if confirm_pc == "Y":
-        player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
-        break
+        while True:
+            confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
+            if confirm_pc == "Y":
+                player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
+                class_unchosen = False
+                break
+            elif confirm_pc == "N":
+                break
+            else:
+                print("Invalid option. Try again: ")
     # Prince is charismatic, intelligent and fast.
     elif player_character == "PRINCE":
-        player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
-        player_gold = 350
-        break
+        while True:
+            confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
+            if confirm_pc == "Y":            
+                player_stats[0:] = [7, 17, 8, 19, 6, 0, 19, 4, 10]
+                player_gold = 350
+                class_unchosen = False
+                break
+            elif confirm_pc == "N":
+                break
+            else:
+                print("Invalid option. Try again: ")
     else:
         print("This is not an available class, please choose again.")
 
