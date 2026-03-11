@@ -199,7 +199,7 @@ while player_alive:
 
             black_bear_fight = True
 
-            while black_bear_fight:
+            while True:
 
                 fr_choice_running = True
                 print(f"Black Bear HP: {black_bear_hp}/{black_bear_hpmax}")
@@ -213,20 +213,11 @@ while player_alive:
                         pass
                 
                 if fr_choice == "ATTACK":
+
                     if player_stats[0] >= random.randint(5,15):
                         dmg_bb = random.randint(0, 101)
                         print(f"You dealt {dmg_bb} damage to the bear!")
                         black_bear_hp -= dmg_bb
-                        if black_bear_hp <= 0:
-                            print("You defeated the Wild Black Bear!")
-                            black_bear_fight = False
-                            choice1 = False
-                            if difficulty == "HARD":
-                                player_gold += random.randint(0, 201) * 2
-                            else:
-                                player_gold += random.randint(0, 201)
-                            print(f"You now have {player_gold} gold!")
-
                     else:
                         dmg_player_bb = random.randint(0, 101)
                         print(f"You missed! and the bear dealt {dmg_player_bb} to you!")
@@ -234,42 +225,53 @@ while player_alive:
                         if player_hp <= 0:
                             print("The Wild Black Bear defeated you!")
                             print("Game Over!")
-                            black_bear_fight = False
-                            choice1 = False
                             player_alive = False
+                            choice1 = False
+                            break
+
                 elif fr_choice == "PERSUADE":
                     if player_stats[3] >= random.randint(5, 16) and player_stats[6] >= random.randint(5, 16):
                         print("You succesfully communicated with the bear in 'bear' language...")
                         print("the bear understood you were just a mere traveller and let you pass...")
                         player_stat_info()
                         print()
-                        black_bear_fight = False
                         choice1 = False
+                        break
                 elif fr_choice == "RUN":
                     if player_stats[7] >= random.randint(0, 11):
-                        black_bear_fight = False
                         choice1 = False
                         print("You successfully evaded the bear and ran away!")
                         player_stat_info()
                         print()
+                        break
                     else:
                         print("You tried to evade the Wild Black Bear, instead you jumped right into his mouth..")
                         print("..maybe next time.")
                         print()
                         print("Game Over!")
                         player_stat_info()
-                        black_bear_fight = False
-                        choice1 = False
                         player_alive = False
+                        choice1 = False
+                        break
                 elif fr_choice == "SEDUCE":
                     print("You attempted to seduce the Wild Black Bear and in return...")
                     print("the Wild Black Bear ate you... nice try... i guess...")
                     print()
                     print("Game Over!")
                     player_stat_info()
+                    player_alive = False
+                    choice1 = False
+                    break
+
+                elif black_bear_hp <= 0:
+                    print("You defeated the Wild Black Bear!")
+                    if difficulty == "HARD":
+                        player_gold += random.randint(0, 201) * 2
+                    else:
+                        player_gold += random.randint(0, 201)
+                        print(f"You now have {player_gold} gold!")
                     black_bear_fight = False
                     choice1 = False
-                    player_alive = False
         
         elif environment1 == "Desert":
             print()
@@ -339,8 +341,8 @@ while player_alive:
                     print("The lion defeated you!")
                     print()
                     print("Game Over!")
-                    choice1 = False
                     player_alive = False
+                    choice1 = False
                     break
 
             # once fight ends, choice1 loop is exited
