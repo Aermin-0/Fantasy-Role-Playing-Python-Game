@@ -29,6 +29,9 @@ while player_alive:
     # initiliaze players health amount
     player_hp = 100
 
+    #player inventory list
+    player_inventory = []
+
     # player classes
     class_unchosen = True
     while class_unchosen:
@@ -58,6 +61,7 @@ while player_alive:
         print()
         print("Class:", player_character.capitalize())
         print("Health:", player_hp,"/ 100")
+        print("Inventory:",player_inventory)
         print("Gold:", player_gold)
         print("------------------")
         print("       Stats      ")
@@ -355,7 +359,39 @@ while player_alive:
         print("You have arrived at the Merchants!...")
         merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
-            pass
+            player_stat_info()
+            while True:
+                Shop_selection = input("Which item would you like to purchase? \n (Rusty Sword - 100 Gold) " \
+                "\n (Health Potion - 150 Gold) \n (Cracked Armour - 100 Gold) \n (Lottery Ticket - 50 Gold) \n").upper()
+                if Shop_selection in ("RUSTY SWORD, HEALTH POTION, CRACKED ARMOUR, LOTTERY TICKET"):
+                    break 
+                else:
+                    print("Invalid option, please choose again ")
+            if Shop_selection == "RUSTY SWORD":
+                player_inventory.append("RUSTY SWORD")
+                break
+
+            elif Shop_selection == "HEALTH POTION":
+                player_inventory.append("HEALTH POTION")
+                break
+            
+            elif Shop_selection == "CRACKED ARMOUR":
+                player_inventory.append("CRACKED ARMOUR")
+                break
+            elif Shop_selection == "LOTTERY TICKET":
+                player_inventory.append("LOTTERY TICKET")
+                break
+
+                  
+
+            
+
+
+
+               
+            
+                
+
 
 # To Do:
 # Cave and Swamp
