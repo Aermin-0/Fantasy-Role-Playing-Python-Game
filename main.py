@@ -183,12 +183,11 @@ while player_alive:
             print("and your wanted for stealing all of their renowned mushroom bread!")
             print("You encounter King Toadstool and he wants you executed! What will you do?!")
             
-            mk_choice_running = True
-            while mk_choice_running:
+            while True:
                 player_stat_info()
                 mk_choice = input("(Attack, Persuade, Run, or.. Seduce?) ").upper()
                 if mk_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
-                    mk_choice_running = False
+                    break
                 else:
                     print("Invalid Option. Try again.")
 
@@ -210,7 +209,7 @@ while player_alive:
                     else:
                         goldgiven_mk = random.randint(250, 501)
                     player_gold += goldgiven_mk
-                    choice1_environments.pop(2)
+                    choice1_environments.pop("Mushroom Kingdom")
 
                     print("You succesfully persuaded the King with your charisma, claiming you'll")
                     print("return the bread with a small loan of gold from the King!")
@@ -245,8 +244,50 @@ while player_alive:
                 player_alive = False
                 break
 
-            else:
-                print("Not a valid choice. Try again.")
+        elif environment1 == "Cave":
+            print()
+            print("While walking down the path, you see an interesting looking cave...")
+            cave_input = input("do you enter? (Y / N): ").upper()
+            while True:
+                if cave_input == "Y":
+                    print()
+                    print("You enter the cave and you see a Shiny Item on the floor.." \
+                    "\nonly it's being guarded by a Giant Spider! What do you do?")
+
+                    while True:
+                        player_stat_info()
+                        cv_choice = input("Attack, Persuade, Run, or.. Seduce?").upper()
+                        if cv_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
+                            break
+                        else:
+                            print("Invalid option. Try again.")
+
+                    if cv_choice == "ATTACK":
+                        if player_stats[0] >= random.randint(0, 16):
+                            pass
+                        else:
+                            pass
+
+                    elif cv_choice == "PERSUADE":
+                        if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                            pass
+                        else:
+                            pass
+
+                    elif cv_choice == "RUN":
+                        if player_stats[1] >= random.randint(0, 16):
+                            pass
+                        else:
+                            pass
+
+                    elif cv_choice == "SEDUCE":
+                        pass
+
+                elif cave_input == "N":
+                    choice1_environments.pop("Cave")
+                    break
+                else:
+                    cave_input = input("Invalid option. Try again: ")
 
         elif environment1 == "Forest":
             print()
