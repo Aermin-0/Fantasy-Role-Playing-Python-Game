@@ -14,12 +14,12 @@ player_gold = 0
 # initiliaze players health amount
 player_hp = 100
 
-
 print("Welcome to the Dungeons & Dragons Python Game!")
 
 # set game difficulty
 while True:
     difficulty = input("Enter your difficulty (Easy / Hard): ").upper()
+    # if users input meets conditions, loop is exited
     if difficulty == "EASY":
         break
     elif difficulty == "HARD":
@@ -28,18 +28,37 @@ while True:
         print("Invalid option. Try again.")
 
 # player classes
-while True:
+class_unchosen = True
+while class_unchosen:
     player_character = input("Choose your character type (Knight, Mage, Ninja, Prince): ").upper()
     # Knight is Strong, Endurant, and Evasive.
     if player_character == "KNIGHT":
-        player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
-        break
+        while True:
+            confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
+            if confirm_pc == "Y":
+                player_stats[0:] = [18, 7, 9, 6, 17, 3, 8, 8, 6]
+                class_unchosen = False
+                break
+            elif confirm_pc == "N":
+                break
+            else:
+                print("Invalid option. Try again: ")        
     # Mage is intelligent, charismatic, dexteric and skilled in arcane.
     elif player_character == "MAGE":
-        player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
-        break
+        while True:
+            confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
+            if confirm_pc == "Y":
+                player_stats[0:] = [4, 6, 16, 7, 6, 18, 17, 7, 6]
+                class_unchosen = False
+                break
+            elif confirm_pc == "N":
+                break
+            else:
+                print("Invalid option. Try again: ")
     # Ninja is fast, dexteric, evasive.
     elif player_character == "NINJA":
+        confirm_pc = input(f"You have selected {player_character}. Do you wish to continue? (Y / N): ").upper()
+        if confirm_pc == "Y":
         player_stats[0:] = [13, 18, 17, 9, 7, 2, 12, 15, 6]
         break
     # Prince is charismatic, intelligent and fast.
