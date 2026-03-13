@@ -161,7 +161,7 @@ while player_alive:
             understand_input = input("I'm afraid you mispoke... try again. (Y / N) ").upper()
 
     # initiliaze availabe environments for choice one
-    choice1_environments = ["Forest", "Desert", "Mushroom Kingdom", "Forest", "Desert", "Swamp", "Cave"]
+    choice1_environments = ["Forest", "Desert", "Mushroom Kingdom", "Forest", "Desert", "Cave"]
 
     print()
     print("On your voluntary journey to save the King's daughter, you encounter a split in the roads...")
@@ -253,18 +253,21 @@ while player_alive:
             print("While walking down the path, you see an interesting looking cave...")
             cave_input = input("do you enter? (Y / N): ").upper()
 
-            if difficulty == "HARD":    
-                cave_boss_health = random.choice(boss_health_hard)
-                cave_boss_health_max = cave_boss_health
-            else:
-                cave_boss_health = random.choice(boss_health_easy)
-                cave_boss_health_max = cave_boss_health
-
             cave_decision = True
 
             while cave_decision:
                 if cave_input == "Y":
+
+                    # determine cave boss health
+                    if difficulty == "HARD":    
+                        cave_boss_health = random.choice(boss_health_hard)
+                        cave_boss_health_max = cave_boss_health
+                    else:
+                        cave_boss_health = random.choice(boss_health_easy)
+                        cave_boss_health_max = cave_boss_health   
+
                     cave_active = True
+
                     print()
                     print("You enter the cave and you see a Shiny Item on the floor.." \
                     "\nonly it's being guarded by a Giant Spider! What do you do?")
@@ -273,7 +276,7 @@ while player_alive:
                         while True:
                             print(f"Boss Health: {cave_boss_health} / {cave_boss_health_max}")
                             player_stat_info()
-                            cv_choice = input("Attack, Persuade, Run, or.. Seduce?").upper()
+                            cv_choice = input("Attack, Persuade, Run, or.. Seduce?: ").upper()
                             if cv_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
                                 break
                             else:
@@ -288,8 +291,11 @@ while player_alive:
                                 if cave_boss_health <= 0:
                                     if difficulty == "HARD":
                                         goldgiven_cave = random.randint(0, 201) * 2
+                                        player_gold += goldgiven_cave
                                     else:
                                         goldgiven_cave = random.randint(0, 201)
+                                        player_gold += goldgiven_cave
+                                        print()
                                     print("You defeated the Giant Spider! and under it was a Mysterious Key! \nIt's been added to your inventory!")
                                     player_inventory.append("Mysterious Key")
                                     choice1 = False
@@ -300,6 +306,7 @@ while player_alive:
                             else:
                                 cave_dmg_pl = random.randint(0, 51)
                                 player_hp -= cave_dmg_pl
+                                print()
                                 print(f"You missed! The boss dealt {cave_dmg_pl} damage to you!")
                                 if player_hp <= 0:
                                     print("The Giant Spider defeated you!")
@@ -311,16 +318,57 @@ while player_alive:
                                     cave_active = False
 
                         elif cv_choice == "PERSUADE":
+                            # awards less gold (100 max, x2 if difficulty = hard) due to non-attack
                             if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
-                                pass
+                                if difficulty == "HARD":
+                                    goldgiven_cave = random.randint(0, 101) * 2
+                                    player_gold += goldgiven_cave
+                                else:
+                                    goldgiven_cave = random.randint(0, 101)
+                                    player_gold += goldgiven_cave
+                                print()
+                                print("You successfully managed to persuade the Giant Spider by distracting it...")
+                                print("with your horrific attempt to communicate with it, thus confusing it...")
+                                print()
+                                print("You successfully distracted the Giant Spider! and under it was a Mysterious Key! /nIt's been added to your inventory!")
+                                player_inventory.append("Mysterious Key")
                             else:
-                                pass
+                                cave_dmg_pl = random.randint(0, 51)
+                                player_hp -= cave_dmg_pl
+                                print()
+                                print("You failed to persuade the Giant Spider, while trying to communicate with it, the Giant Spider attackd you!")
+                                print(f"The Giant Spider dealt {cave_dmg_pl} damage to you!")
+                                if player_hp <= 0:
+                                    print("The Giant Spider defeated you!")
+                                    print()
+                                    print("Game over!")
+                                    player_alive = False
+                                    choice1 = False
+                                    cave_decision = False
+                                    cave_active = False
 
                         elif cv_choice == "RUN":
-                            if player_stats[1] >= random.randint(0, 16):
-                                pass
+                            if player_stats[1] >= random.randint(0, 21):
+                                print()
+                                print("You were successfully able to run away!")
+                                choice1_environments.pop("Cave")
+                                cave_decision = False
+                                cave_active = False
                             else:
-                                pass
+                                print()
+                                print("You tried to run but instead you slip and fell!")
+                                cave_dmg_pl = random.randint(0, 51)
+                                player_hp -= cave_dmg_pl
+                                print(f"The Giant Spider dealt {cave_dmg_pl} damage to you!")
+                                if player_hp <= 0:
+                                    print("The Giant Spider defeated you!")
+                                    print()
+                                    print("Game over!")
+                                    player_alive = False
+                                    choice1 = False
+                                    cave_decision = False
+                                    cave_active = False
+
 
                         elif cv_choice == "SEDUCE":
                             pass
@@ -497,32 +545,39 @@ while player_alive:
     if not player_alive:
         break
 
-    while True:
+    merchant_active = True    
+    while merchant_active:
         print()
         print("You have arrived at the Merchants!...")
         merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
             player_stat_info()
             while True:
-                Shop_selection = input("Which item would you like to purchase? \n (Rusty Sword - 100 Gold) " \
-                "\n (Health Potion - 150 Gold) \n (Cracked Armour - 100 Gold) \n (Lottery Ticket - 50 Gold) \n").upper()
+                # get users input for shop
+                Shop_selection = input("Which item would you like to purchase? \n [Rusty Sword - 100 Gold] " \
+                "\n (Health Potion - 150 Gold) \n (Cracked Armour - 100 Gold) \n [Lottery Ticket - 50 Gold] \n").upper()
                 if Shop_selection in ("RUSTY SWORD, HEALTH POTION, CRACKED ARMOUR, LOTTERY TICKET"):
                     break 
                 else:
-                    print("Invalid option, please choose again ")
+                    print("Invalid option, please choose again: ")
+
             if Shop_selection == "RUSTY SWORD":
                 player_inventory.append("RUSTY SWORD")
+                merchant_active = False
                 break
 
             elif Shop_selection == "HEALTH POTION":
                 player_inventory.append("HEALTH POTION")
+                merchant_active = False
                 break
             
             elif Shop_selection == "CRACKED ARMOUR":
                 player_inventory.append("CRACKED ARMOUR")
+                merchant_active = False
                 break
             elif Shop_selection == "LOTTERY TICKET":
                 player_inventory.append("LOTTERY TICKET")
+                merchant_active = False
                 break
 
                   
