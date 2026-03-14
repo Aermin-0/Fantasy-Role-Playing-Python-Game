@@ -501,14 +501,17 @@ while player_alive:
                         dl_dmg_pl = random.randint(0,51)
                         print(f"You failed to hit! Lion dealt {dl_dmg_pl} damange to you!")
                         player_hp -= dl_dmg_pl
+
                 elif dr_choice == "PERSUADE":
                     dl_dmg_pl = random.randint(0,51)
                     print("While attempting to persuade the lion for some reason...")
                     print(f"the lion lunges and deals {dl_dmg_pl} damage to you!")
                     player_hp -= dl_dmg_pl
+
                 elif dr_choice == "RUN":
                     if player_stats[7] >= random.randint(0,11) and player_stats[8] >= random.randint(0,11):
                         print("You successfully ran away!")
+                        choice1 = False 
                         break
                     else:
                         dl_dmg_pl = random.randint(0,51)
@@ -545,44 +548,113 @@ while player_alive:
     if not player_alive:
         break
 
-    merchant_active = True    
+    print()
+    print("You have arrived at the Merchants!...")
+    merchant_input = input("do you wish to see his available items? (Y / N): ").upper()
+
+    merchant_active = True
+
     while merchant_active:
-        print()
-        print("You have arrived at the Merchants!...")
-        merchant_input = input("do you wish to see his available items? (Y / N): ").upper 
         while True:
-            player_stat_info()
-            while True:
-                # get users input for shop
-                Shop_selection = input("Which item would you like to purchase? \n [Rusty Sword - 100 Gold] " \
-                "\n (Health Potion - 150 Gold) \n (Cracked Armour - 100 Gold) \n [Lottery Ticket - 50 Gold] \n").upper()
-                if Shop_selection in ("RUSTY SWORD, HEALTH POTION, CRACKED ARMOUR, LOTTERY TICKET"):
-                    break 
-                else:
-                    print("Invalid option, please choose again: ")
+        # get users input for shop
+            if merchant_input == "Y":
+                break
+            elif merchant_input == "N":
+                merchant_active = False
+                break
+            else:
+                merchant_input = input("Invalid option. Try again: ").upper()
 
-            if Shop_selection == "RUSTY SWORD":
+        player_stat_info()
+        while True:
+
+            shop_items = {"RUSTY SWORD": 100, "HEALTH POTION": 150, "CRACKED ARMOUR": 100, "LOTTERY TICKET": 50}
+
+            # get users input for shop
+            Shop_selection = input("Which item would you like to purchase? \n- [Rusty Sword - 100 Gold] " \
+            "\n- (Health Potion - 150 Gold) \n- (Cracked Armour - 100 Gold) \n- [Lottery Ticket - 50 Gold] \n").upper()
+
+            if Shop_selection in shop_items:
+                break 
+            else:
+                print("Invalid option, please choose again: ")
+
+        if Shop_selection == "RUSTY SWORD":
+            if player_gold >= shop_items["RUSTY SWORD"]:
+                player_gold -= shop_items["RUSTY SWORD"]
                 player_inventory.append("RUSTY SWORD")
+                print("You purchased the Rusty Sword! It has been added to your inventory!")
                 merchant_active = False
                 break
+            else:
+                print("You don't have enough gold to purchase this item.")
+                merchant_input = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                while True:
+                    if merchant_input == "Y":
+                        break
+                    elif merchant_input == "N":
+                        merchant_active = False
+                        break
+                    else:
+                        merchant_input = input("Invalid option. Try again: ").upper()
 
-            elif Shop_selection == "HEALTH POTION":
+        elif Shop_selection == "HEALTH POTION":
+            if player_gold >= shop_items["HEALTH POTION"]:
+                player_gold -= shop_items["HEALTH POTION"]
                 player_inventory.append("HEALTH POTION")
+                print("You purchased the Health Potion! It has been added to your inventory!")
                 merchant_active = False
                 break
-            
-            elif Shop_selection == "CRACKED ARMOUR":
+            else:
+                print("You don't have enough gold to purchase this item.")
+                merchant_input = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                while True:
+                    if merchant_input == "Y":
+                        break
+                    elif merchant_input == "N":
+                        merchant_active = False
+                        break
+                    else:
+                        merchant_input = input("Invalid option. Try again: ").upper()
+
+        elif Shop_selection == "CRACKED ARMOUR":
+            if player_gold >= shop_items["CRACKED ARMOUR"]:
+                player_gold -= shop_items["CRACKED ARMOUR"]
                 player_inventory.append("CRACKED ARMOUR")
+                print("You purchased the Cracked Armour! It has been added to your inventory!")
                 merchant_active = False
                 break
-            elif Shop_selection == "LOTTERY TICKET":
+            else:
+                print("You don't have enough gold to purchase this item.")
+                merchant_input = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                while True:
+                    if merchant_input == "Y":
+                        break
+                    elif merchant_input == "N":
+                        merchant_active = False
+                        break
+                    else:
+                        merchant_input = input("Invalid option. Try again: ").upper()
+                    
+        elif Shop_selection == "LOTTERY TICKET":
+            if player_gold >= shop_items["LOTTERY TICKET"]:
+                player_gold -= shop_items["LOTTERY TICKET"]
                 player_inventory.append("LOTTERY TICKET")
+                print("You purchased the Lottery Ticket! It has been added to your inventory!")
                 merchant_active = False
                 break
+            else:
+                print("You don't have enough gold to purchase this item.")
+                merchant_input = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                while True:
+                    if merchant_input == "Y":
+                        break
+                    elif merchant_input == "N":
+                        merchant_active = False
+                        break
+                    else:
+                        merchant_input = input("Invalid option. Try again: ").upper()
 
-                  
-
-            
 
 
 
