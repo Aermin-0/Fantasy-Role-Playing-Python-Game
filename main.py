@@ -820,23 +820,27 @@ while player_alive:
                         chestLoot_chosen = random.choice(chest_loot)
                         if chestLoot_chosen == "Legendary Sword":
                             player_damage += chest_loot["Legendary Sword"]
+                            player_inventory.append("Legendary Sword")
                             print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot["Legendary Sword"]}!")
                             secret_passage = False
                             break
 
                         elif chestLoot_chosen == "Legendary Armour":
+                            player_inventory.append("Legendary Armour")
                             player_hp += chest_loot["Legendary Armour"]
                             print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot["Legendary Armour"]}!")
                             secret_passage = False
                             break
 
                         elif chestLoot_chosen == "Legendary Potion":
+                            player_inventory.append("Legendary Potion")
                             player_hp += player_stats[1]
                             print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot["Legendary Potion"]}!")
                             secret_passage = False
                             break
 
                         elif chestLoot_chosen == "Legendary Ring":
+                            player_inventory.append("Legendary Ring")
                             player_stats[6] += chest_loot[chestLoot_chosen]
                             player_stats[3] += chest_loot[chestLoot_chosen]
                             print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot["Legendary Ring"]}!")
@@ -862,7 +866,6 @@ while player_alive:
             break
 
         # Stage Two, To DO List:
-        # add more story to the secret passage, and add more choices for the player to make.
         # add more items to the shop, and make them useful for the player in the future.
 
         # Stage Two, Checklist:
