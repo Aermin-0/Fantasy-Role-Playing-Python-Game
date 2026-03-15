@@ -655,21 +655,37 @@ while player_alive:
                     else:
                         merchant_input = input("Invalid option. Try again: ").upper()
     
+
     stage2 = True 
+    stage2_scenario = True
+
     while stage2:
         print("You have exited the shop and continue on your journey to save the King's daughter...")
         print("After walking for what feels like years in the scorching sun, you decide to take shelter in a local building..")
         print("you see 2 buildings, one is a run down cabin and the other is an ominous looking castle... which do you choose?")
 
         stage2_input = input("(Cabin or Castle): ").upper()
-        while True:
+        while stage2_scenario:
             if stage2_input == "CABIN":
 
                 # introduce user to the level
                 print("You enter the cabin and find a friendly old man who offers you a place to rest for the night...")
-                print("You rest for the night and wake up with full health! You continue on your journey to save the King's daughter!")
-                player_hp = 100
-                stage2 = False
+                cabin_input = input("do you stay the night? (Y / N): ").upper()
+                while True:
+                    if cabin_input == "Y":
+                        print("You stay the night and wake up to find out, that the old man had stolen half of your gold!")
+                        goldStolen_cabin = player_gold = player_gold // 2
+                        print(f"The old man stole {goldStolen_cabin} gold!")
+                        # player has seen the old man, and has opportunity to regain their gold.
+                        old_man_seen = True
+                        stage2 = False
+                        stage2_scenario = False
+                        break 
+
+                    elif cabin_input == "N":
+                        stage2_scenario = False
+                    else:
+                        cabin_input = input("Invalid option. Try again: ").upper()
 
             elif stage2_input == "CASTLE":
                 
@@ -709,6 +725,7 @@ while player_alive:
 
                             print("You defeated the ghost! and found a secret passage leading you to the next area!")
                             stage2 = False
+                            secret_passage = True 
                             break   
                         elif player_hp <= 0:
                             print("The ghost defeated you!")
@@ -731,22 +748,59 @@ while player_alive:
                             break
                         else:
                             pass 
+                elif castle_choice == "PERSUADE":
+                    if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                        print("You successfully persuaded the ghost to let you pass through the castle unharmed!")
+                        stage2 = False
+                        stage2_scenario = False
+                        secret_passage = True 
+                        break
+                    else:
+                        castle_dmg_pl = random.randint(0, 51)
+                        player_hp -= castle_dmg_pl
+                        print("You failed to persuade the ghost, while trying to communicate with it, the ghost attackd you!")
+                        print(f"The ghost dealt {castle_dmg_pl} damage to you!")
+                        if player_hp <= 0:
+                            print("The ghost defeated you!")
+                            print()
+                            print("Game over!")
+                            player_alive = False
+                            stage2 = False
+                            break
+                elif castle_choice == "RUN":
+                    if player_stats[7] >= random.randint(0, 11) and player_stats[8] >= random.randint(0, 11):
+                        print("You successfully ran away!")
+                        stage2 = False 
+                        stage2_scenario = False
+                        break
+                    else:
+                        castle_dmg_pl = random.randint(0, 51)
+                        print("You tried to run away but failed!")
+                        print(f"The ghost dealt {castle_dmg_pl} damage to you!")
+                        player_hp -= castle_dmg_pl
+                        if player_hp <= 0:
+                            print("The ghost defeated you!")
+                            print()
+                            print("Game Over!")
+                            player_alive = False
+                            stage2 = False
+                            break
+                elif castle_choice == "SEDUCE":
+                    print("why even choose this action...")
+                    ghost_dmg_pl = random.randint(0, 51)
+                    player_php -= ghost_dmg_pl
+                    if player_hp <= 0:
+                        print("The ghost defeated you!")
+                        print()
+                        print("Game Over!")
+                        player_alive = False
+                        stage2 = False
+                        break
+    
+    while secret_passage:
+        print("You have entered the secret passage and find yourself in a new area...")
+        print("To be continued...")
 
-
-
-
-               
-            
-                
-
-
-# To Do:
-# Cave and Swamp
-# Shop system after choice1 is exited.
-            
-                
-
-
-# To Do:
-# Cave and Swamp
-# Shop system after choice1 is exited.
+        # To Do:
+        # add more story to the secret passage, and add more choices for the player to make.
+        # add more items to the shop, and make them useful for the player in the future.
