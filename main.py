@@ -13,12 +13,15 @@ mage_stats = [4, 6, 16, 7, 6, 18, 17, 7, 6]
 ninja_stats = [13, 18, 17, 9, 7, 2, 12, 15, 6]
 prince_stats = [7, 17, 8, 19, 6, 0, 19, 4, 10]
 
+# initiliaze player damage
+plaer_damage = 0
 
 # initiliaze players currency amount
 player_gold = 0
 
 # initiliaze players health amount
 player_hp = 100
+player_hp_max = player_hp
 
 # player inventory list
 player_inventory = []
@@ -787,8 +790,10 @@ while player_alive:
                             break
                 elif castle_choice == "SEDUCE":
                     print("why even choose this action...")
+                    print("The ghost mistook your seduction as an opportunity to damage you!")
                     ghost_dmg_pl = random.randint(0, 51)
                     player_php -= ghost_dmg_pl
+                    print(f"The ghost dealt {ghost_dmg_pl} damage to you!")
                     if player_hp <= 0:
                         print("The ghost defeated you!")
                         print()
@@ -799,8 +804,68 @@ while player_alive:
     
     while secret_passage:
         print("You have entered the secret passage and find yourself in a new area...")
-        print("To be continued...")
+        print("you go downstairs and find a locked chest!...")
+        if "Mysterious Key" in player_inventory:
+            print("You have the Mysterious Key in your inventory...")
+            key_input = input("would you like to use it to open the chest? (Y / N): ").upper()
+            while True:
+                if key_input == "Y":
+                    # 1. Legenedary Sword - increases attack by 50
+                    # 2. Legendary Armour - increases health by 50
+                    # 3. Legendary Potion - fully restores health + 50 permanent health increase
+                    # 4. Legendary Ring - increases arcane & intelligence by 6
+                    chest_loot = {"Legendary Sword": 50, "Legendary Armour": 50, "Legendary Potion": 50, "Legendary Ring": 6}
+                    print("You used the Mysterious Key to open the chest and found a powerful item inside!...")
+                    if difficulty == "HARD":
+                        chestLoot_chosen = random.choice(chest_loot)
+                        if chestLoot_chosen == "Legendary Sword":
+                            player_damage += chest_loot["Legendary Sword"]
+                            print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot["Legendary Sword"]}!")
+                            secret_passage = False
+                            break
 
-        # To Do:
+                        elif chestLoot_chosen == "Legendary Armour":
+                            player_hp += chest_loot["Legendary Armour"]
+                            print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot["Legendary Armour"]}!")
+                            secret_passage = False
+                            break
+
+                        elif chestLoot_chosen == "Legendary Potion":
+                            player_hp += player_stats[1]
+                            print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot["Legendary Potion"]}!")
+                            secret_passage = False
+                            break
+
+                        elif chestLoot_chosen == "Legendary Ring":
+                            player_stats[6] += chest_loot[chestLoot_chosen]
+                            player_stats[3] += chest_loot[chestLoot_chosen]
+                            print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot["Legendary Ring"]}!")
+                            secret_passage = False
+                            break
+                            
+                    else:
+                        secret_passage = False
+                        break
+
+                    secret_passage = False
+                    break
+                elif key_input == "N":
+                    print("You decided not to use the Mysterious Key and left the chest unopened...")
+                    print("You continue on your journey and find yourself at a fork in the path...")
+                    secret_passage = False
+                    break 
+                else:
+                    key_input = input("Invalid option. Try again: ").upper()
+        else:
+            print("You don't have the Mysterious Key in your inventory, so you can't open the chest...")
+            print("You continue on your journey and find yourself at a fork in the path...")
+            break
+
+        # Stage Two, To DO List:
         # add more story to the secret passage, and add more choices for the player to make.
         # add more items to the shop, and make them useful for the player in the future.
+
+        # Stage Two, Checklist:
+        # - (Attack, Persuade, Run, Seduce) fight with the ghost in the castle (done)
+        # - Health & Attack stats for interactions (done)
+        # - Secret passage after ghost fight (done, but needs more work)
