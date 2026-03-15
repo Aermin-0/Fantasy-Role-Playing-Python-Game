@@ -1,4 +1,4 @@
-# Fantasy-Role-Playing-Python-Game [0.1]
+# Fantasy-Role-Playing-Python-Game [0.2]
 
 A terminal-based fantasy role-playing game inspired by Dungeons &amp; Dragons, coded in Python.
 
