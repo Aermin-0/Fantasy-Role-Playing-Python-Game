@@ -654,11 +654,95 @@ while player_alive:
                         break
                     else:
                         merchant_input = input("Invalid option. Try again: ").upper()
+    
+    stage2 = True 
+    while stage2:
+        print("You have exited the shop and continue on your journey to save the King's daughter...")
+        print("After walking for what feels like years in the scorching sun, you decide to take shelter in a local building..")
+        print("you see 2 buildings, one is a run down cabin and the other is an ominous looking castle... which do you choose?")
+
+        stage2_input = input("(Cabin or Castle): ").upper()
+        while True:
+            if stage2_input == "CABIN":
+
+                # introduce user to the level
+                print("You enter the cabin and find a friendly old man who offers you a place to rest for the night...")
+                print("You rest for the night and wake up with full health! You continue on your journey to save the King's daughter!")
+                player_hp = 100
+                stage2 = False
+
+            elif stage2_input == "CASTLE":
+                
+                # determine castle boss health
+                if difficulty == "HARD":
+                    castle_boss_health = random.choice(boss_health_hard)
+                    castle_boss_health_max = castle_boss_health
+                else:
+                    castle_boss_health = random.choice(boss_health_easy)
+                    castle_boss_health_max = castle_boss_health
+
+                print("You enter the castle and find the place to be abandoned and very dark...")
+                print("While exploring the castle, you encounter a ghost! What do you do?")
+                while True:
+                    player_stat_info()
+                    castle_choice = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
+                    if castle_choice in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
+                        break
+                    else:
+                        print("Invalid option. Try again.")
+                
+                if castle_choice == "ATTACK":
+                    if player_stats[0] >= random.randint(0, 16):
+
+                        pl_dmg_castle = random.randint(0, 101)
+                        castle_boss_health -= pl_dmg_castle
+
+                        print(f"You dealt {pl_dmg_castle} damage to the ghost!")
+                        if castle_boss_health <= 0:
+                            # determine gold given to player
+                            if difficulty == "HARD":
+                                goldgiven_castle = random.randint(0, 201) * 2
+                                player_gold += goldgiven_castle
+                            else:
+                                goldgiven_castle = random.randint(0, 201)
+                                player_gold += goldgiven_castle
+
+                            print("You defeated the ghost! and found a secret passage leading you to the next area!")
+                            stage2 = False
+                            break   
+                        elif player_hp <= 0:
+                            print("The ghost defeated you!")
+                            print("Game Over!")
+                            player_alive = False
+                            stage2 = False
+                            break  
+                        else:
+                            pass    
+                        
+                    else:
+                        castle_dmg_pl = random.randint(0, 51)
+                        player_hp -= castle_dmg_pl
+                        print(f"You missed! and the ghost dealt {castle_dmg_pl} damage to you!")
+                        if player_hp <= 0:
+                            print("The ghost defeated you!")
+                            print("Game Over!")
+                            player_alive = False
+                            stage2 = False
+                            break
+                        else:
+                            pass 
 
 
 
 
                
+            
+                
+
+
+# To Do:
+# Cave and Swamp
+# Shop system after choice1 is exited.
             
                 
 
