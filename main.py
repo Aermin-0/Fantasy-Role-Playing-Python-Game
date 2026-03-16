@@ -891,10 +891,29 @@ while player_alive:
             print("You continue on your journey and head to Njyurhavn, a nearby city...")
             break
 
-        # Stage Two, To DO List:
-        # add more items to the shop, and make them useful for the player in the future.
+    stage3 = True
+    while stage3:
+        print()
+        print("You have arrived at Njyurhavn, a city that is said to be the home of the most powerful sorcerer in the world...")
+        print("You have heard that the sorcerer has a powerful item that can help you in your quest to save the King's daughter, but you also heard that the sorcerer is very dangerous and has a powerful army of minions protecting him...")
+        print("You have two options, you can either try to sneak into the sorcerer's tower and steal the item, or you can try to fight the sorcerer and his minions head on... which do you choose?")
+        stage3_input = input("(Sneak or Fight): ").upper()
+        while True:
+            if stage3_input in ("SNEAK", "FIGHT"):
+                break
+            else:
+                stage3_input = input("Invalid option. Try again: ").upper()
+        if stage3_input == "SNEAK":
+            if player_stats[1] >= random.randint(0, 16) and player_stats[9] >= random.randint(0, 16):
+                print("You decided to sneak into the sorcerer's tower and try to steal the item...")
+                print("You successfully snuck into the tower and found the Book of Knowledge, a powerful item that can help you in your quest to save the King's daughter!")
+                player_inventory.append("Book of Knowledge")
+                print("You quickly left the tower and continue on your journey to save the King's daughter...")
+                stage3 = False
+            else:
+                print("You tried to sneak into the sorcerer's tower but got caught by the sorcerer's minions...")
+                print("The sorcerer is very angry and decides to fight you himself...")
 
-        # Stage Two, Checklist:
-        # - (Attack, Persuade, Run, Seduce) fight with the ghost in the castle (done)
-        # - Health & Attack stats for interactions (done)
-        # - Secret passage after ghost fight (done, but needs more work)
+                # To DO List:
+                # - create a fight sequence for the sorcerer and his minions, with different stats and abilities for each enemy.
+                # - create a way for the player to escape the tower after defeating the sorcerer and his minions.
