@@ -908,6 +908,7 @@ while player_alive:
                 print("You decided to sneak into the sorcerer's tower and try to steal the item...")
                 print("You successfully snuck into the tower and found the Book of Knowledge, a powerful item that can help you in your quest to save the King's daughter!")
                 player_inventory.append("Book of Knowledge")
+                print()
                 print("You quickly left the tower and continue on your journey to save the King's daughter...")
                 stage3 = False
             else:
@@ -917,3 +918,129 @@ while player_alive:
                 # To DO List:
                 # - create a fight sequence for the sorcerer and his minions, with different stats and abilities for each enemy.
                 # - create a way for the player to escape the tower after defeating the sorcerer and his minions.
+        elif stage3_input == "FIGHT":
+
+            # determine sorcerer health
+            if difficulty == "HARD":
+                sorcerer_hp = random.choice(boss_health_hard)
+                sorcerer_hpmax = sorcerer_hp
+            else:
+                sorcerer_hp = random.choice(boss_health_easy)
+                sorcerer_hpmax = sorcerer_hp
+
+            player_stat_info()
+            print("You decided to fight the sorcerer and his minions head on...")
+            print("the sorcerer steps forward to fight...")
+            stage3Fight_input = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
+            while True:
+                if stage3Fight_input in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
+                    break
+                else:
+                    stage3Fight_input = input("Invalid option. Try again: ").upper()
+
+            while player_alive and sorcerer_hp > 0:
+                if stage3Fight_input == "ATTACK":
+                    
+                    if player_stats[0] >= random.randint(0, 16):
+                        pl_dmg_sorcerer = random.randint(0, 101)
+                        print(f"You dealt {pl_dmg_sorcerer} damage to the sorcerer!")
+                        sorcerer_hp -= pl_dmg_sorcerer
+                        if sorcerer_hp <= 0:
+
+                            if difficulty == "HARD":
+                                goldgiven_sorcerer = random.randint(0, 201) * 2
+                                player_gold += goldgiven_sorcerer
+                            else:
+                                goldgiven_sorcerer = random.randint(0, 201)
+                                player_gold += goldgiven_sorcerer
+
+                            print("You defeated the sorcerer and his minions, and retrieved the Book of Knowledge from the sorcerer's chamber!")
+                            player_inventory.append("Book of Knowledge")
+                            print(f"You now have {player_gold} gold!")
+                            stage3 = False
+                            break   
+                        elif player_hp <= 0:
+                            print("The sorcerer defeated you!")
+                            print("Game Over!")
+                            player_alive = False
+                            stage3 = False
+                            break  
+
+                    else:
+                        sorcerer_dmg_pl = random.randint(0, 51)
+                        player_hp -= sorcerer_dmg_pl
+                        print(f"You missed! and the sorcerer dealt {sorcerer_dmg_pl} damage to you!")
+                        if player_hp <= 0:
+                            print("The sorcerer defeated you!")
+                            print("Game Over!")
+                            player_alive = False
+                            stage3 = False
+                            break
+
+                elif stage3Fight_input == "PERSUADE":   
+                    if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                        print("You successfully persuaded the sorcerer to let you pass through his tower unharmed!")
+                        print("and he even gave you the Book of Knowledge, a powerful item that can help you in your quest to save the King's daughter!")
+                        player_inventory.append("Book of Knowledge")
+                        stage3 = False
+                        break
+                    else:
+                        sorcerer_dmg_pl = random.randint(0, 51)
+                        player_hp -= sorcerer_dmg_pl
+                        print("You failed to persuade the sorcerer, while trying to communicate with him, the sorcerer attackd you!")
+                        print(f"The sorcerer dealt {sorcerer_dmg_pl} damage to you!")
+                        if player_hp <= 0:
+                            print("The sorcerer defeated you!")
+                            print()
+                            print("Game Over!")
+                            player_alive = False
+                            stage3 = False
+                            break     
+                        
+                elif stage3Fight_input == "RUN":
+                    if player_stats[7] >= random.randint(0, 11) and player_stats[8] >= random.randint(0, 11):
+                        print("You successfully ran away from the sorcerer and his minions!")
+                        stage3 = False 
+                        break
+                    else:
+                        sorcerer_dmg_pl = random.randint(0, 51)
+                        print("You tried to run away but failed!")
+                        print(f"The sorcerer dealt {sorcerer_dmg_pl} damage to you!")
+                        player_hp -= sorcerer_dmg_pl
+                        if player_hp <= 0:
+                            print("The sorcerer defeated you!")
+                            print()
+                            print("Game Over!")
+                            player_alive = False
+                            stage3 = False
+                            break
+
+                elif stage3Fight_input == "SEDUCE":
+                    print("You attempted to seduce the sorcerer and his minions, but they were not interested in your advances...")
+                    print("The sorcerer and his minions attack you while you're vulnerable!")
+                    sorcerer_dmg_pl = random.randint(0, 51)
+                    player_hp -= sorcerer_dmg_pl
+                    print(f"The sorcerer and his minions dealt {sorcerer_dmg_pl} damage to you!")
+                    if player_hp <= 0:
+                        print("The sorcerer defeated you!")
+                        print()
+                        print("Game Over!")
+                        player_alive = False
+                        stage3 = False
+                        break
+
+    while True:
+        if "Book of Knowledge" in player_inventory:
+            print("You have the Book of Knowledge in your inventory, which can help you in your quest to save the King's daughter...")
+            print("You continue on your journey and head to the final area, where the King's daughter is being held captive by a powerful dragon...")
+            break
+        else:
+            print("You don't have the Book of Knowledge in your inventory, the key item to finding the King's daughter...")
+            print("You return to the King empty handed and fail in your quest to save his daughter...")
+            print()
+            print("Game Over!")
+            player_alive = False
+            break
+
+    # To be continued...
+
