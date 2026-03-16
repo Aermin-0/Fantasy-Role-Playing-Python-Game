@@ -125,7 +125,7 @@ while class_unchosen:
 def player_stat_info():    
     print()
     print("Class:", player_character.capitalize())
-    print("Health:", player_hp,"/ 100")
+    print("Health:", player_hp,"/", player_hp_max)
     print("Inventory:",player_inventory)
     print("Gold:", player_gold)
     print("------------------")
@@ -816,53 +816,79 @@ while player_alive:
                     # 4. Legendary Ring - increases arcane & intelligence by 6
                     chest_loot = {"Legendary Sword": 50, "Legendary Armour": 50, "Legendary Potion": 50, "Legendary Ring": 6}
                     print("You used the Mysterious Key to open the chest and found a powerful item inside!...")
-                    if difficulty == "HARD":
-                        chestLoot_chosen = random.choice(chest_loot)
-                        if chestLoot_chosen == "Legendary Sword":
+                    chestLoot_chosen = random.choice(chest_loot)
+                    if chestLoot_chosen == "Legendary Sword":
+
+                        # if difficulty is hard, full 50 attack increase, if difficulty is easy, 25 attack increase
+                        if difficulty == "HARD":
                             player_damage += chest_loot["Legendary Sword"]
-                            player_inventory.append("Legendary Sword")
-                            print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot["Legendary Sword"]}!")
-                            secret_passage = False
-                            break
+                        else:
+                            player_damage += chest_loot["Legendary Sword"] // 2
+                        player_inventory.append("Legendary Sword")
 
-                        elif chestLoot_chosen == "Legendary Armour":
-                            player_inventory.append("Legendary Armour")
-                            player_hp += chest_loot["Legendary Armour"]
-                            print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot["Legendary Armour"]}!")
-                            secret_passage = False
-                            break
+                        print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot["Legendary Sword"]}!")
+                        print("You continue on your journey and head to Njyurhavn, a nearby city...")
 
-                        elif chestLoot_chosen == "Legendary Potion":
-                            player_inventory.append("Legendary Potion")
-                            player_hp += player_stats[1]
-                            print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot["Legendary Potion"]}!")
-                            secret_passage = False
-                            break
-
-                        elif chestLoot_chosen == "Legendary Ring":
-                            player_inventory.append("Legendary Ring")
-                            player_stats[6] += chest_loot[chestLoot_chosen]
-                            player_stats[3] += chest_loot[chestLoot_chosen]
-                            print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot["Legendary Ring"]}!")
-                            secret_passage = False
-                            break
-                            
-                    else:
                         secret_passage = False
                         break
 
-                    secret_passage = False
-                    break
+                    elif chestLoot_chosen == "Legendary Armour":
+
+                        # if difficulty is hard, full 50 health increase, if difficulty is easy, 25 health increase
+                        if difficulty == "HARD":
+                            player_hp += chest_loot["Legendary Armour"]
+                        else:
+                            player_hp += chest_loot["Legendary Armour"] // 2
+                        player_inventory.append("Legendary Armour")
+
+                        print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot["Legendary Armour"]}!")
+                        print("You continue on your journey and head to Njyurhavn, a nearby city...")
+
+                        secret_passage = False
+                        break
+
+                    elif chestLoot_chosen == "Legendary Potion":
+
+                        # if difficulty is hard, full 50 health increase, if difficulty is easy, 25 health increase
+                        if difficulty == "HARD":
+                            player_hp_max += chest_loot["Legendary Potion"]
+                        else:
+                            player_hp_max += chest_loot["Legendary Potion"] // 2
+                        player_hp = player_hp_max
+
+                        print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot["Legendary Potion"]}!")
+                        print("You continue on your journey and head to Njyurhavn, a nearby city...") 
+                                          
+                        secret_passage = False
+                        break
+
+                    elif chestLoot_chosen == "Legendary Ring":
+
+                        # if difficulty is hard, full 6 arcane and intelligence increase, if difficulty is easy, 3 arcane and intelligence increase
+                        if difficulty == "HARD":
+                            player_stats[6] += chest_loot[chestLoot_chosen]
+                            player_stats[3] += chest_loot[chestLoot_chosen]
+                        else:
+                            player_stats[6] += chest_loot[chestLoot_chosen] // 2
+                            player_stats[3] += chest_loot[chestLoot_chosen] // 2
+                        player_inventory.append("Legendary Ring")
+
+                        print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot["Legendary Ring"]}!")
+                        print("You continue on your journey and head to Njyurhavn, a nearby city...")       
+
+                        secret_passage = False
+                        break
+
                 elif key_input == "N":
                     print("You decided not to use the Mysterious Key and left the chest unopened...")
-                    print("You continue on your journey and find yourself at a fork in the path...")
+                    print("You continue on your journey and head to Njyurhavn, a nearby city...")
                     secret_passage = False
                     break 
                 else:
                     key_input = input("Invalid option. Try again: ").upper()
         else:
             print("You don't have the Mysterious Key in your inventory, so you can't open the chest...")
-            print("You continue on your journey and find yourself at a fork in the path...")
+            print("You continue on your journey and head to Njyurhavn, a nearby city...")
             break
 
         # Stage Two, To DO List:
