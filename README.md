@@ -2,6 +2,9 @@
 
 A terminal-based fantasy role-playing game inspired by Dungeons &amp; Dragons, coded in Python.
 
+Ærmin:
+This is my FIRST major project.
+
 [Long-Term Goals:]
 - legendary items (done)
 - secret levels (in progress)
