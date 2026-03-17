@@ -300,6 +300,8 @@ while player_alive:
                                         player_gold += goldgiven_cave
                                         print()
                                     print("You defeated the Giant Spider! and under it was a Mysterious Key! \nIt's been added to your inventory!")
+                                    print(f"You earned {goldgiven_cave} gold from defeating the Giant Spider!")
+                                    print(f"You now have {player_gold} gold!")
                                     player_inventory.append("Mysterious Key")
                                     choice1 = False
                                     cave_decision = False
@@ -663,8 +665,10 @@ while player_alive:
     stage2_scenario = True
 
     while stage2:
+        print()
         print("You have exited the shop and continue on your journey to save the King's daughter...")
         print("After walking for what feels like years in the scorching sun, you decide to take shelter in a local building..")
+        print()
         print("you see 2 buildings, one is a run down cabin and the other is an ominous looking castle... which do you choose?")
 
         stage2_input = input("(Cabin or Castle): ").upper()
@@ -672,10 +676,12 @@ while player_alive:
             if stage2_input == "CABIN":
 
                 # introduce user to the level
+                print()
                 print("You enter the cabin and find a friendly old man who offers you a place to rest for the night...")
                 cabin_input = input("do you stay the night? (Y / N): ").upper()
                 while True:
                     if cabin_input == "Y":
+                        print()
                         print("You stay the night and wake up to find out, that the old man had stolen half of your gold!")
                         goldStolen_cabin = player_gold = player_gold // 2
                         print(f"The old man stole {goldStolen_cabin} gold!")
@@ -700,6 +706,7 @@ while player_alive:
                     castle_boss_health = random.choice(boss_health_easy)
                     castle_boss_health_max = castle_boss_health
 
+                print()
                 print("You enter the castle and find the place to be abandoned and very dark...")
                 print("While exploring the castle, you encounter a ghost! What do you do?")
                 while True:
@@ -726,12 +733,15 @@ while player_alive:
                                 goldgiven_castle = random.randint(0, 201)
                                 player_gold += goldgiven_castle
 
+                            print()
                             print("You defeated the ghost! and found a secret passage leading you to the next area!")
                             stage2 = False
                             secret_passage = True 
                             break   
                         elif player_hp <= 0:
+                            print()
                             print("The ghost defeated you!")
+                            print()
                             print("Game Over!")
                             player_alive = False
                             stage2 = False
@@ -742,9 +752,11 @@ while player_alive:
                     else:
                         castle_dmg_pl = random.randint(0, 51)
                         player_hp -= castle_dmg_pl
+                        print()
                         print(f"You missed! and the ghost dealt {castle_dmg_pl} damage to you!")
                         if player_hp <= 0:
                             print("The ghost defeated you!")
+                            print()
                             print("Game Over!")
                             player_alive = False
                             stage2 = False
@@ -753,6 +765,7 @@ while player_alive:
                             pass 
                 elif castle_choice == "PERSUADE":
                     if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                        print()
                         print("You successfully persuaded the ghost to let you pass through the castle unharmed!")
                         stage2 = False
                         stage2_scenario = False
@@ -761,9 +774,11 @@ while player_alive:
                     else:
                         castle_dmg_pl = random.randint(0, 51)
                         player_hp -= castle_dmg_pl
+                        print()
                         print("You failed to persuade the ghost, while trying to communicate with it, the ghost attackd you!")
                         print(f"The ghost dealt {castle_dmg_pl} damage to you!")
                         if player_hp <= 0:
+                            print()
                             print("The ghost defeated you!")
                             print()
                             print("Game over!")
@@ -778,10 +793,12 @@ while player_alive:
                         break
                     else:
                         castle_dmg_pl = random.randint(0, 51)
+                        print()
                         print("You tried to run away but failed!")
                         print(f"The ghost dealt {castle_dmg_pl} damage to you!")
                         player_hp -= castle_dmg_pl
                         if player_hp <= 0:
+                            print()
                             print("The ghost defeated you!")
                             print()
                             print("Game Over!")
@@ -789,12 +806,14 @@ while player_alive:
                             stage2 = False
                             break
                 elif castle_choice == "SEDUCE":
+                    print()
                     print("why even choose this action...")
                     print("The ghost mistook your seduction as an opportunity to damage you!")
                     ghost_dmg_pl = random.randint(0, 51)
                     player_php -= ghost_dmg_pl
                     print(f"The ghost dealt {ghost_dmg_pl} damage to you!")
                     if player_hp <= 0:
+                        print()
                         print("The ghost defeated you!")
                         print()
                         print("Game Over!")
@@ -803,9 +822,11 @@ while player_alive:
                         break
     
     while secret_passage:
+        print()
         print("You have entered the secret passage and find yourself in a new area...")
         print("you go downstairs and find a locked chest!...")
         if "Mysterious Key" in player_inventory:
+            print()
             print("You have the Mysterious Key in your inventory...")
             key_input = input("would you like to use it to open the chest? (Y / N): ").upper()
             while True:
@@ -814,9 +835,12 @@ while player_alive:
                     # 2. Legendary Armour - increases health by 50
                     # 3. Legendary Potion - fully restores health + 50 permanent health increase
                     # 4. Legendary Ring - increases arcane & intelligence by 6
+        
                     chest_loot = {"Legendary Sword": 50, "Legendary Armour": 50, "Legendary Potion": 50, "Legendary Ring": 6}
+                    print()
                     print("You used the Mysterious Key to open the chest and found a powerful item inside!...")
                     chestLoot_chosen = random.choice(chest_loot)
+
                     if chestLoot_chosen == "Legendary Sword":
 
                         # if difficulty is hard, full 50 attack increase, if difficulty is easy, 25 attack increase
@@ -826,7 +850,8 @@ while player_alive:
                             player_damage += chest_loot["Legendary Sword"] // 2
                         player_inventory.append("Legendary Sword")
 
-                        print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot["Legendary Sword"]}!")
+                        print()
+                        print(f"You found the Legendary Sword! Your attack has permanently increased by {chest_loot['Legendary Sword']}!")
                         print("You continue on your journey and head to Njyurhavn, a nearby city...")
 
                         secret_passage = False
@@ -836,12 +861,13 @@ while player_alive:
 
                         # if difficulty is hard, full 50 health increase, if difficulty is easy, 25 health increase
                         if difficulty == "HARD":
-                            player_hp += chest_loot["Legendary Armour"]
+                            player_hp += chest_loot['Legendary Armour']
                         else:
-                            player_hp += chest_loot["Legendary Armour"] // 2
+                            player_hp += chest_loot['Legendary Armour'] // 2
                         player_inventory.append("Legendary Armour")
 
-                        print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot["Legendary Armour"]}!")
+                        print()
+                        print(f"You found the Legendary Armour! Your health has permanently increased by {chest_loot['Legendary Armour']}!")
                         print("You continue on your journey and head to Njyurhavn, a nearby city...")
 
                         secret_passage = False
@@ -851,12 +877,13 @@ while player_alive:
 
                         # if difficulty is hard, full 50 health increase, if difficulty is easy, 25 health increase
                         if difficulty == "HARD":
-                            player_hp_max += chest_loot["Legendary Potion"]
+                            player_hp_max += chest_loot['Legendary Potion']
                         else:
-                            player_hp_max += chest_loot["Legendary Potion"] // 2
+                            player_hp_max += chest_loot['Legendary Potion'] // 2
                         player_hp = player_hp_max
 
-                        print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot["Legendary Potion"]}!")
+                        print()
+                        print(f"You found the Legendary Potion! Your health has been fully restored and permanently increased by {chest_loot['Legendary Potion']}!")
                         print("You continue on your journey and head to Njyurhavn, a nearby city...") 
                                           
                         secret_passage = False
@@ -873,13 +900,15 @@ while player_alive:
                             player_stats[3] += chest_loot[chestLoot_chosen] // 2
                         player_inventory.append("Legendary Ring")
 
-                        print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot["Legendary Ring"]}!")
+                        print()
+                        print(f"You found the Legendary Ring! Your arcane and intelligence have both increased by {chest_loot['Legendary Ring']}!")
                         print("You continue on your journey and head to Njyurhavn, a nearby city...")       
 
                         secret_passage = False
                         break
 
                 elif key_input == "N":
+                    print()
                     print("You decided not to use the Mysterious Key and left the chest unopened...")
                     print("You continue on your journey and head to Njyurhavn, a nearby city...")
                     secret_passage = False
@@ -887,6 +916,7 @@ while player_alive:
                 else:
                     key_input = input("Invalid option. Try again: ").upper()
         else:
+            print()
             print("You don't have the Mysterious Key in your inventory, so you can't open the chest...")
             print("You continue on your journey and head to Njyurhavn, a nearby city...")
             break
@@ -896,6 +926,7 @@ while player_alive:
         print()
         print("You have arrived at Njyurhavn, a city that is said to be the home of the most powerful sorcerer in the world...")
         print("You have heard that the sorcerer has a powerful item that can help you in your quest to save the King's daughter, but you also heard that the sorcerer is very dangerous and has a powerful army of minions protecting him...")
+        print()
         print("You have two options, you can either try to sneak into the sorcerer's tower and steal the item, or you can try to fight the sorcerer and his minions head on... which do you choose?")
         stage3_input = input("(Sneak or Fight): ").upper()
         while True:
@@ -905,6 +936,7 @@ while player_alive:
                 stage3_input = input("Invalid option. Try again: ").upper()
         if stage3_input == "SNEAK":
             if player_stats[1] >= random.randint(0, 16) and player_stats[9] >= random.randint(0, 16):
+                print()
                 print("You decided to sneak into the sorcerer's tower and try to steal the item...")
                 print("You successfully snuck into the tower and found the Book of Knowledge, a powerful item that can help you in your quest to save the King's daughter!")
                 player_inventory.append("Book of Knowledge")
@@ -912,6 +944,7 @@ while player_alive:
                 print("You quickly left the tower and continue on your journey to save the King's daughter...")
                 stage3 = False
             else:
+                print()
                 print("You tried to sneak into the sorcerer's tower but got caught by the sorcerer's minions...")
                 print("The sorcerer is very angry and decides to fight you himself...")
 
@@ -931,6 +964,7 @@ while player_alive:
             player_stat_info()
             print("You decided to fight the sorcerer and his minions head on...")
             print("the sorcerer steps forward to fight...")
+            print()
             stage3Fight_input = input("(Attack, Persuade, Run, or.. Seduce?): ").upper()
             while True:
                 if stage3Fight_input in ("ATTACK", "PERSUADE", "RUN", "SEDUCE"):
@@ -943,6 +977,7 @@ while player_alive:
                     
                     if player_stats[0] >= random.randint(0, 16):
                         pl_dmg_sorcerer = random.randint(0, 101)
+                        print()
                         print(f"You dealt {pl_dmg_sorcerer} damage to the sorcerer!")
                         sorcerer_hp -= pl_dmg_sorcerer
                         if sorcerer_hp <= 0:
@@ -954,13 +989,16 @@ while player_alive:
                                 goldgiven_sorcerer = random.randint(0, 201)
                                 player_gold += goldgiven_sorcerer
 
+                            print()
                             print("You defeated the sorcerer and his minions, and retrieved the Book of Knowledge from the sorcerer's chamber!")
                             player_inventory.append("Book of Knowledge")
                             print(f"You now have {player_gold} gold!")
                             stage3 = False
                             break   
                         elif player_hp <= 0:
+                            print()
                             print("The sorcerer defeated you!")
+                            print()
                             print("Game Over!")
                             player_alive = False
                             stage3 = False
