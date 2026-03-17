@@ -13,6 +13,9 @@ mage_stats = [4, 6, 16, 7, 6, 18, 17, 7, 6]
 ninja_stats = [13, 18, 17, 9, 7, 2, 12, 15, 6]
 prince_stats = [7, 17, 8, 19, 6, 0, 19, 4, 10]
 
+# initiliaze player companions list
+player_companions = []
+
 # initiliaze player damage
 plaer_damage = 0
 
@@ -140,7 +143,10 @@ def player_stat_info():
     print(f"Intelligence: {player_stats[6]}")
     print(f"Evasiveness: {player_stats[7]}")
     print(f"Luck: {player_stats[8]}")
-    print()
+    print("------------------")
+    print("     Companions   ")
+    print("------------------")
+    print(":", player_companions)
 
 
 while player_alive:
@@ -586,7 +592,7 @@ while player_alive:
             if Shop_selection in shop_items:
                 break 
             else:
-                print("Invalid option, please choose again: ")
+                print("Invalid option")
 
         if Shop_selection == "RUSTY SWORD":
             if player_gold >= shop_items["RUSTY SWORD"]:
@@ -1083,6 +1089,204 @@ while player_alive:
             print("Game Over!")
             player_alive = False
             break
+
+    merchantActive_2 = True
+    while merchantActive_2:
+        print()
+        print("On your way to the final area, you encounter another merchant...")
+        merchant_input_2 = input("do you wish to see his available items? (Y / N): ").upper()
+
+        while True:
+            if merchant_input_2 == "Y":
+                break
+            elif merchant_input_2 == "N":
+                merchantActive_2 = False
+                break
+            else:
+                merchant_input_2 = input("Invalid option. Try again: ").upper()
+
+        player_stat_info()
+        while True:
+
+            shop_items_2 = {"EXCALIBUR": 500, "ELIXIR OF LIFE": 750, "DRAGON ARMOUR": 1000, "MAP TO DRAGON'S LAIR": 250}
+
+            Shop_selection_2 = input("Which item would you like to purchase? \n- [Excalibur - 500 Gold] "\
+            "\n- (Elixir of Life - 750 Gold) \n- (Dragon Armour - 1000 Gold) \n- [Map to Dragon's Lair - 250 Gold] \n").upper()
+            if Shop_selection_2 == "EXCALIBUR":
+                if player_gold >= shop_items_2["EXCALIBUR"]:
+                    player_gold -= shop_items_2["EXCALIBUR"]
+                    player_inventory.append("EXCALIBUR")
+                    print("You purchased Excalibur! It has been added to your inventory!")
+                    merchantActive_2 = False
+                    break
+                else:
+                    print("You don't have enough gold to purchase this item.")
+                    merchant_input_2 = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                    while True:
+                        if merchant_input_2 == "Y":
+                            break
+                        elif merchant_input_2 == "N":
+                            merchantActive_2 = False
+                            break
+                        else:
+                            merchant_input_2 = input("Invalid option. Try again: ").upper()
+            elif Shop_selection_2 == "ELIXIR OF LIFE":
+                if player_gold >= shop_items_2["ELIXIR OF LIFE"]:
+                    player_gold -= shop_items_2["ELIXIR OF LIFE"]
+                    player_inventory.append("ELIXIR OF LIFE")
+                    print("You purchased the Elixir of Life! It has been added to your inventory!")
+                    merchantActive_2 = False
+                    break
+                else:
+                    print("You don't have enough gold to purchase this item.")
+                    merchant_input_2 = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                    while True:
+                        if merchant_input_2 == "Y":
+                            break
+                        elif merchant_input_2 == "N":
+                            merchantActive_2 = False
+                            break
+                        else:
+                            merchant_input_2 = input("Invalid option. Try again: ").upper()
+            elif Shop_selection_2 == "DRAGON ARMOUR":
+                if player_gold >= shop_items_2["DRAGON ARMOUR"]:
+                    player_gold -= shop_items_2["DRAGON ARMOUR"]
+                    player_inventory.append("DRAGON ARMOUR")
+                    print("You purchased the Dragon Armour! It has been added to your inventory!")
+                    merchantActive_2 = False
+                    break
+                else:
+                    print("You don't have enough gold to purchase this item.")
+                    merchant_input_2 = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                    while True:
+                        if merchant_input_2 == "Y":
+                            break
+                        elif merchant_input_2 == "N":
+                            merchantActive_2 = False
+                            break
+                        else:
+                            merchant_input_2 = input("Invalid option. Try again: ").upper()
+            elif Shop_selection_2 == "MAP TO DRAGON'S LAIR":
+                if player_gold >= shop_items_2["MAP TO DRAGON'S LAIR"]:
+                    player_gold -= shop_items_2["MAP TO DRAGON'S LAIR"]
+                    player_inventory.append("MAP TO DRAGON'S LAIR")
+                    print("You purchased the Map to Dragon's Lair! It has been added to your inventory!")
+                    dragonLair = True
+                    merchantActive_2 = False
+                    break
+                else:
+                    print("You don't have enough gold to purchase this item.")
+                    merchant_input_2 = input("Do you wish to see the shop items again? (Y / N): ").upper()
+                    while True:
+                        if merchant_input_2 == "Y":
+                            break
+                        elif merchant_input_2 == "N":
+                            merchantActive_2 = False
+                            break
+                        else:
+                            merchant_input_2 = input("Invalid option. Try again: ").upper()
+            else:
+                print("Invalid option. Try again.")
+    
+    while dragonLair:
+        print()
+        print("You have the Map to the Dragon's Lair in your inventory!...")
+        print("using this information, you follow the map to find this lair, travelling through dangerous terrain and overcoming various obstacles along the way...")
+        print("until finally, you arrive at the entrance to the Dragon's Lair, where a powerful dragon is said to reside...")
+        print()
+        print("You enter the lair, and find the dragon sleeping on a pile of gold and treasure...")
+        print("What do you do?")
+        while True:
+            player_stat_info()
+            dragonLair_input = input("(Attack, Persuade, Run, or.. Tame?): ").upper()
+            if dragonLair_input in ("ATTACK", "PERSUADE", "RUN", "TAME"):
+                break
+            else:
+                print("Invalid option. Try again.")
+        
+        if dragonLair_input == "ATTACK":
+            print("You decided to attack the dragon while it's sleeping...")
+            print("The dragon wakes up and is very angry that you disturbed its sleep, and it attacks you with its fiery breath!")
+            dragon_dmg_pl = random.randint(0, 101)
+            player_hp -= dragon_dmg_pl
+            print(f"The dragon dealt {dragon_dmg_pl} damage to you!")
+            if player_hp <= 0:
+                print("The dragon defeated you!")
+                print()
+                print("Game Over!")
+                player_alive = False
+                dragonLair = False
+            else:
+                pass
+
+        elif dragonLair_input == "PERSUADE":
+            print("You decided to try to persuade the dragon to let you pass through its lair unharmed...")
+            if player_stats[3] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                print("You successfully persuaded the dragon to let you pass through its lair unharmed!")
+                print("and it even gave you a powerful item, the Dragon's Scale, which can help you in your quest to save the King's daughter!")
+                player_inventory.append("Dragon's Scale")
+                dragonLair = False
+            else:
+                print("You failed to persuade the dragon, while trying to communicate with it, the dragon attackd you with its fiery breath!")
+                dragon_dmg_pl = random.randint(0, 101)
+                player_hp -= dragon_dmg_pl
+                print(f"The dragon dealt {dragon_dmg_pl} damage to you!")
+                if player_hp <= 0:
+                    print("The dragon defeated you!")
+                    print()
+                    print("Game Over!")
+                    player_alive = False
+                    dragonLair = False
+
+        elif dragonLair_input == "RUN":
+            print("You decided to try to run away from the dragon...")
+            if player_stats[7] >= random.randint(0, 11) and player_stats[8] >= random.randint(0, 11):
+                print("You successfully ran away from the dragon!")
+                dragonLair = False 
+            else:
+                print("You tried to run away but failed!")
+                print("The dragon attackd you with its fiery breath as you were trying to escape!")
+                dragon_dmg_pl = random.randint(0, 101)
+                player_hp -= dragon_dmg_pl
+                print(f"The dragon dealt {dragon_dmg_pl} damage to you!")
+                if player_hp <= 0:
+                    print("The dragon defeated you!")
+                    print()
+                    print("Game Over!")
+                    player_alive = False
+                    dragonLair = False
+        
+        elif dragonLair_input == "TAME":
+            print()
+            print("You decided to try to tame the dragon and make it your ally...")
+            if player_stats[5] >= random.randint(0, 11) and player_stats[6] >= random.randint(0, 11):
+                print()
+                print("You successfully tamed the dragon and made it your ally!")
+                print("The dragon is very grateful that you showed it kindness and respect, and it decides to help you in your quest to save the King's daughter!")
+                print()
+
+                # determine gold given to player
+                if difficulty == "HARD":
+                    goldgiven_dragon = random.randint(0, 201) * 2
+                    player_gold += goldgiven_dragon
+                else:
+                    goldgiven_dragon = random.randint(0, 201)
+                    player_gold += goldgiven_dragon
+
+                print(f"The dragon also gave you {goldgiven_dragon} gold as a token of its gratitude!")
+                player_inventory.append("Tamed Dragon")
+                dragonLair = False
+            else:
+                print("You failed to tame the dragon, while trying to communicate with it, the dragon attackd you with its fiery breath!")
+                dragon_dmg_pl = random.randint(0, 101)
+                player_hp -= dragon_dmg_pl
+                print(f"The dragon dealt {dragon_dmg_pl} damage to you!")
+                if player_hp <= 0:
+                    print("The dragon defeated you!")
+                    print()
+                    print("Game Over!")
+                    player_alive = False
+                    dragonLair = False
 
     # To be continued...
 
